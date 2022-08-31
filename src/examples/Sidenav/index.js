@@ -207,6 +207,7 @@ Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   brand: PropTypes.string,
   brandName: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
