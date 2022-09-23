@@ -1,0 +1,56 @@
+{
+	"security.workspace.trust.untrustedFiles": "open",
+	"workbench.iconTheme": "vscode-great-icons",
+	"workbench.colorTheme": "Monokai",
+	"gitlens.advanced.messages": {
+		"suppressGitMissingWarning": true
+	},
+	"bracket-pair-colorizer-2.depreciation-notice": false,
+	"atomKeymap.promptV3Features": true,
+	"editor.largeFileOptimizations": false,
+	"editor.minimap.showSlider": "always",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.workingDirectories": [
+		"./client",
+		"./server"
+	],
+	"files.exclude": {
+		"**/.git": false,
+	},
+	"settingsSync.ignoredSettings": [],
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"editor.language.brackets": [],
+	"editor.insertSpaces": false,
+	"editor.quickSuggestions": {
+		"other": "on",
+		"comments": "off",
+		"strings": "off"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"editor.guides.bracketPairs": true,
+	"editor.formatOnSave": true,
+	"[json]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"window.zoomLevel": -1,
+	"editor.fontLigatures": false,
+	"editor.detectIndentation": false,
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"[javascript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"editor.tabSize": 2,
+	"php.validate.executablePath": "",
+}
