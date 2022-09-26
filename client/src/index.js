@@ -1,34 +1,31 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
+import { createRoot } from 'react-dom/client';
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+// third party
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-Coded by www.creative-tim.com
+// project imports
+import * as serviceWorker from 'serviceWorker';
+import App from 'App';
+import { store } from 'store';
 
- =========================================================
+// style + assets
+import 'assets/scss/style.scss';
+import config from './config';
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+// ==============================|| REACT DOM RENDER  ||============================== //
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-
-// Material Dashboard 2 React Context Provider
-import { MaterialUIControllerProvider } from "./context";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <MaterialUIControllerProvider>
-        <App />
-      </MaterialUIControllerProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+    <Provider store={store}>
+        <BrowserRouter basename={config.basename}>
+            <App />
+        </BrowserRouter>
+    </Provider>
 );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

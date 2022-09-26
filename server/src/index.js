@@ -16,11 +16,11 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/auth", authenticationRoutes);
-app.use("/maintenance/models", modelRoutes);
-app.use("/maintenance/products", productRoutes);
-app.use("/maintenance/parts", partRoutes);
-app.use("/maintenance/assembly", assemblRoutes);
+app.use("/api/auth", authenticationRoutes);
+app.use("/api/maintenance/models", modelRoutes);
+app.use("/api/maintenance/products", productRoutes);
+app.use("/api/maintenance/parts", partRoutes);
+app.use("/api/maintenance/assembly", assemblRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
