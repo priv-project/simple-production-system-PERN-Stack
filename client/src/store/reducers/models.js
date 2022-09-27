@@ -7,9 +7,9 @@ export default (models = [], action) => {
         case actionTypes.CREATE:
             return [...models, action.payload.result];
         case actionTypes.UPDATE:
-            return models.map((model) => (model._id === action.payload._id ? action.payload : post));
+            return models.map((model) => (model.model_id === action.payload.result.model_id ? action.payload.result : model));
         case actionTypes.DELETE:
-            return models.filter((model) => model._id !== action.payload);
+            return models.filter((model) => model.model_id !== action.payload);
         default:
             return models;
     }
