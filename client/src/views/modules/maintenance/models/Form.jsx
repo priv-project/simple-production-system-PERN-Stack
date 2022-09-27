@@ -92,10 +92,11 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                     <Button size="small" onClick={clear}>
                         Cancel
                     </Button>
-
-                    <Button size="small" color="secondary" onClick={handleDelete}>
-                        Delete
-                    </Button>
+                    {currentId !== 0 ?? (
+                        <Button size="small" color="secondary" onClick={handleDelete}>
+                            Delete
+                        </Button>
+                    )}
                 </ButtonGroup>
             </Box>
         </form>
