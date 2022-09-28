@@ -17,6 +17,8 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const ModelsPage = Loadable(lazy(() => import('views/modules/maintenance/models')));
+const ProductsPage = Loadable(lazy(() => import('views/modules/maintenance/products')));
+const AssemblyPage = Loadable(lazy(() => import('views/modules/maintenance/assembly')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -29,9 +31,17 @@ const MaintenanceRoutes = {
             element: <ModelsPage />
         },
         {
-            path: 'sample-page',
-            element: <SamplePage />
+            path: 'products',
+            element: <ProductsPage />
+        },
+        {
+            path: 'assembly',
+            element: <AssemblyPage />
         }
+        // {
+        //     path: 'sample-page',
+        //     element: <SamplePage />
+        // }
     ]
 };
 

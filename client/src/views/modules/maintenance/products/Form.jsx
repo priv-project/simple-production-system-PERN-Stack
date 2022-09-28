@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import { Button, ButtonGroup, Box, Grid, MenuItem } from '@mui/material';
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
 
 // MATERIAL ICONS
 
@@ -18,19 +17,21 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { createModel, updateModel, deleteModel } from 'actions/models';
+import { createProduct, updateProduct, deleteProduct } from 'actions/products';
 
-const Form = ({ currentId, setCurrentId, setFormVisible }) => {
+const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
-    const [modelData, setModelData] = React.useState({
-        model_code: '',
-        model_description: '',
-        model_status: '',
-        model_created_date: '',
-        model_updated_at: ''
+    const [productData, setProductData] = React.useState({
+        product_code: '',
+        product_description: '',
+        product_model_id: '',
+        product_remark: '',
+        product_status: '',
+        product_created_date: '',
+        product_updated_at: ''
     });
-    const model = useSelector((state) => (currentId ? state.models.find((model) => model.model_id === currentId) : null));
+    const product = useSelector((state) => (currentId ? state.products.find((product) => product.product_id === currentId) : null));
 
     const handleDelete = () => {
         Swal.fire({
@@ -43,7 +44,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteModel(currentId));
+                dispatch(deleteProduct(currentId));
                 setFormVisible(false);
                 setCurrentId(0);
             }
@@ -51,26 +52,27 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     };
 
     React.useEffect(() => {
-        if (model) setModelData(model);
-    }, [model]);
+        if (product) setProductData(product);
+    }, [product]);
 
     return (
         <Formik
             enableReinitialize={true}
-            initialValues={modelData}
+            initialValues={productData}
             validationSchema={Yup.object().shape({
-                model_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('Model code is required'),
-                model_description: Yup.string().max(200, 'Maximum value is 200.'),
-                model_status: Yup.string().min(5).max(10, 'Maximum value is 10.')
+                product_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('Model code is required'),
+                product_description: Yup.string().max(200, 'Maximum value is 200.'),
+                product_model_id: Yup.number().required('Model is required'),
+                product_remark: Yup.string().max(200, 'Maximum value is 200.')
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                 try {
                     if (scriptedRef.current) {
                         if (currentId === 0) {
                             // , name: user?.result?.name
-                            dispatch(createModel({ ...values }, setFormVisible));
+                            dispatch(createProduct({ ...values }, setFormVisible));
                         } else {
-                            dispatch(updateModel(currentId, { ...values }, setFormVisible));
+                            dispatch(updateProduct(currentId, { ...values }, setFormVisible));
                         }
                         setStatus({ success: true });
                         setSubmitting(false);
@@ -90,9 +92,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                     <Grid container spacing={1}>
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
-                                label="Model"
-                                name="model_code"
-                                value={values.model_code}
+                                label="Product Code"
+                                name="product_code"
+                                value={values.product_code}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -104,8 +106,8 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
                                 label="Description"
-                                name="model_description"
-                                value={values.model_description}
+                                name="product_description"
+                                value={values.product_description}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -115,14 +117,31 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                             />
                         </Grid>
                     </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item lg={4} md={4} sm={12}>
+                            <JSelect
+                                label="Model"
+                                labelId="product_model_id"
+                                id="product_model_id"
+                                name="product_model_id"
+                                value={values.product_model_id}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                errors={errors}
+                            >
+                                {models.map((model) => {
+                                    return <MenuItem value={model.model_id}>{model.model_code}</MenuItem>;
+                                })}
+                            </JSelect>
+                        </Grid>
+                    </Grid>
                     {currentId ? (
                         <Grid container spacing={1} sx={{ mt: 1 }}>
                             <Grid item lg={4} md={4} sm={12}>
                                 <JSelect
-                                    labelId="model_status"
-                                    id="model_status"
-                                    name="model_status"
-                                    value={values.model_status}
+                                    labelId="product_status"
+                                    name="product_status"
+                                    value={values.product_status}
                                     label="Status"
                                     onBlur={handleBlur}
                                     onChange={handleChange}

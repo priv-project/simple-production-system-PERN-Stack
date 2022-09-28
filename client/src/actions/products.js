@@ -2,49 +2,49 @@ import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/index.js';
 import Swal from 'sweetalert2';
 
-export const getModels = () => async (dispatch) => {
+export const getProducts = () => async (dispatch) => {
     try {
-        const { data } = await api.fetchModels();
-        dispatch({ type: actionTypes.FETCH_ALL, payload: data });
+        const { data } = await api.fetchProducts();
+        dispatch({ type: actionTypes.FETCH_PRODUCT, payload: data });
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const createModel = (model, setFormVisible) => async (dispatch) => {
+export const createProduct = (product, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.createModel(model);
+        const { data } = await api.createProduct(product);
 
         dispatch({ type: actionTypes.CREATE, payload: data });
         setFormVisible(false);
 
-        Swal.fire('Success!', 'Model has been added successfully', 'success');
+        Swal.fire('Success!', 'Product has been added successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const updateModel = (id, model, setFormVisible) => async (dispatch) => {
+export const updateProduct = (id, product, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.updateModel(id, model);
+        const { data } = await api.updateProduct(id, product);
 
         dispatch({ type: actionTypes.UPDATE, payload: data });
         setFormVisible(false);
-        Swal.fire('Success!', 'Model updated successfully', 'success');
+        Swal.fire('Success!', 'Product updated successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const deleteModel = (id) => async (dispatch) => {
+export const deleteProduct = (id) => async (dispatch) => {
     try {
-        await await api.deleteModel(id);
+        await await api.deleteProduct(id);
 
         dispatch({ type: actionTypes.DELETE, payload: id });
-        Swal.fire('Success!', 'Model deleted successfully', 'success');
+        Swal.fire('Success!', 'Product deleted successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');

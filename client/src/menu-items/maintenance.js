@@ -24,6 +24,20 @@ const dashboard = {
                     type: 'item',
                     url: '/maintenance/models',
                     target: false
+                },
+                {
+                    id: 'products',
+                    title: 'Products',
+                    type: 'item',
+                    url: '/maintenance/products',
+                    target: false
+                },
+                {
+                    id: 'assembly',
+                    title: 'Assembly',
+                    type: 'item',
+                    url: '/maintenance/assembly',
+                    target: false
                 }
             ]
         }

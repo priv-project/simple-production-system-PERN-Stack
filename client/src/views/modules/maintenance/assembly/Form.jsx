@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import { Button, ButtonGroup, Box, Grid, MenuItem } from '@mui/material';
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
 
 // MATERIAL ICONS
 
@@ -12,25 +11,33 @@ import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
 import useScriptRef from 'hooks/useScriptRef';
 import JTextField from 'components/JTextField';
 import JSelect from 'components/JSelect';
+import JComboBox from 'components/JComboBox';
 
 // third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { createModel, updateModel, deleteModel } from 'actions/models';
+import { createAssembly, updateAssembly, deleteAssembly } from 'actions/assembly';
 
-const Form = ({ currentId, setCurrentId, setFormVisible }) => {
+const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
-    const [modelData, setModelData] = React.useState({
-        model_code: '',
-        model_description: '',
-        model_status: '',
-        model_created_date: '',
-        model_updated_at: ''
+    const [assemblyData, setAssemblyData] = React.useState({
+        passembly_code: '',
+        assembly_description: '',
+        assembly_model_id: '',
+        assembly_part_id: '',
+        assembly_status: '',
+        assembly_created_date: '',
+        assembly_updated_at: ''
     });
-    const model = useSelector((state) => (currentId ? state.models.find((model) => model.model_id === currentId) : null));
+    const assy = useSelector((state) => (currentId ? state.assembly.find((assy) => assy.assembly_id === currentId) : null));
+    const partOptions = parts.map((part) => {
+        return { part_id: part.part_id, part_code: part.part_code };
+    });
+
+    console.log(partOptions);
 
     const handleDelete = () => {
         Swal.fire({
@@ -43,7 +50,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteModel(currentId));
+                dispatch(deleteAssembly(currentId));
                 setFormVisible(false);
                 setCurrentId(0);
             }
@@ -51,26 +58,30 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     };
 
     React.useEffect(() => {
-        if (model) setModelData(model);
-    }, [model]);
+        if (assy) setAssemblyData(assy);
+    }, [assy]);
 
     return (
         <Formik
             enableReinitialize={true}
-            initialValues={modelData}
+            initialValues={assemblyData}
             validationSchema={Yup.object().shape({
-                model_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('Model code is required'),
-                model_description: Yup.string().max(200, 'Maximum value is 200.'),
-                model_status: Yup.string().min(5).max(10, 'Maximum value is 10.')
+                passembly_code: Yup.string(4)
+                    .min(4, 'Minimum value is 4.')
+                    .max(50, 'Maximum value is 4.')
+                    .required('Model code is required'),
+                assembly_description: Yup.string(4).min(4, 'Minimum value is 4.').max(200, 'Maximum value is 50'),
+                assembly_model_id: Yup.number().required('Model is required.'),
+                assembly_part_id: Yup.number().required('Part is required.')
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                 try {
                     if (scriptedRef.current) {
                         if (currentId === 0) {
                             // , name: user?.result?.name
-                            dispatch(createModel({ ...values }, setFormVisible));
+                            dispatch(createProduct({ ...values }, setFormVisible));
                         } else {
-                            dispatch(updateModel(currentId, { ...values }, setFormVisible));
+                            dispatch(updateProduct(currentId, { ...values }, setFormVisible));
                         }
                         setStatus({ success: true });
                         setSubmitting(false);
@@ -90,9 +101,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                     <Grid container spacing={1}>
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
-                                label="Model"
-                                name="model_code"
-                                value={values.model_code}
+                                label="Assembly Code"
+                                name="assembly_code"
+                                value={values.assembly_code}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -104,8 +115,8 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
                                 label="Description"
-                                name="model_description"
-                                value={values.model_description}
+                                name="assembly_description"
+                                value={values.assembly_description}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -115,14 +126,45 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                             />
                         </Grid>
                     </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item lg={4} md={4} sm={12}>
+                            <JSelect
+                                label="Model"
+                                labelId="assembly_model_id"
+                                name="product_model_id"
+                                value={values.product_model_id}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                errors={errors}
+                            >
+                                {models.map((model, index) => {
+                                    return (
+                                        <MenuItem key={index} value={model.model_id}>
+                                            {model.model_code}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </JSelect>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item lg={4} md={4} sm={12}>
+                            <JComboBox
+                                options={partOptions}
+                                name="assembly_part_id"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                errors={errors}
+                            />
+                        </Grid>
+                    </Grid>
                     {currentId ? (
                         <Grid container spacing={1} sx={{ mt: 1 }}>
                             <Grid item lg={4} md={4} sm={12}>
                                 <JSelect
-                                    labelId="model_status"
-                                    id="model_status"
-                                    name="model_status"
-                                    value={values.model_status}
+                                    labelId="assembly_status"
+                                    name="assembly_status"
+                                    value={values.assembly_status}
                                     label="Status"
                                     onBlur={handleBlur}
                                     onChange={handleChange}

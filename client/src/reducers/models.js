@@ -1,4 +1,4 @@
-import * as actionTypes from '../customActionTypes';
+import * as actionTypes from 'constants/actionTypes';
 
 export default (models = [], action) => {
     switch (action.type) {

@@ -6,33 +6,42 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import ModelGrid from './Grid';
-import ModelForm from './Form';
+import ProductGrid from './Grid';
+import ProductForm from './Form';
 import Toolbar from './Toolbar';
 
+import { getProducts } from 'actions/products';
 import { getModels } from 'actions/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const ModelsPage = () => {
+const ProductsPage = () => {
     const dispatch = useDispatch();
+    const products = useSelector((state) => state.products);
     const models = useSelector((state) => state.models);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
 
     React.useEffect(() => {
+        dispatch(getProducts());
         dispatch(getModels());
     }, [currentId, dispatch]);
 
     return (
-        <MainCard title="MODELS LIST">
+        <MainCard title="PRODUCTS">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />
             {formVisible ? (
-                <ModelForm currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
+                <ProductForm
+                    currentId={currentId}
+                    setCurrentId={setCurrentId}
+                    formVisible={formVisible}
+                    setFormVisible={setFormVisible}
+                    models={models}
+                />
             ) : (
-                <ModelGrid models={models} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
+                <ProductGrid data={products} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
         </MainCard>
     );
 };
 
-export default ModelsPage;
+export default ProductsPage;

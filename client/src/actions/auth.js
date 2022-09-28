@@ -1,4 +1,4 @@
-import * as actionTypes from 'store/customActionTypes';
+import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/index.js';
 import Swal from 'sweetalert2';
 

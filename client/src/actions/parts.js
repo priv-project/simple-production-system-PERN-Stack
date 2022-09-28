@@ -2,49 +2,49 @@ import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/index.js';
 import Swal from 'sweetalert2';
 
-export const getModels = () => async (dispatch) => {
+export const getParts = () => async (dispatch) => {
     try {
-        const { data } = await api.fetchModels();
-        dispatch({ type: actionTypes.FETCH_ALL, payload: data });
+        const { data } = await api.fetchParts();
+        dispatch({ type: actionTypes.FETCH_PART, payload: data });
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const createModel = (model, setFormVisible) => async (dispatch) => {
+export const createPart = (part, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.createModel(model);
+        const { data } = await api.createPart(part);
 
         dispatch({ type: actionTypes.CREATE, payload: data });
         setFormVisible(false);
 
-        Swal.fire('Success!', 'Model has been added successfully', 'success');
+        Swal.fire('Success!', 'Part has been added successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const updateModel = (id, model, setFormVisible) => async (dispatch) => {
+export const updatePart = (id, part, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.updateModel(id, model);
+        const { data } = await api.updatePart(id, part);
 
         dispatch({ type: actionTypes.UPDATE, payload: data });
         setFormVisible(false);
-        Swal.fire('Success!', 'Model updated successfully', 'success');
+        Swal.fire('Success!', 'Part updated successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const deleteModel = (id) => async (dispatch) => {
+export const deletePart = (id) => async (dispatch) => {
     try {
-        await await api.deleteModel(id);
+        await await api.deletePart(id);
 
         dispatch({ type: actionTypes.DELETE, payload: id });
-        Swal.fire('Success!', 'Model deleted successfully', 'success');
+        Swal.fire('Success!', 'Part deleted successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
