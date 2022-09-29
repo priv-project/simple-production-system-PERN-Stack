@@ -24,7 +24,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
     const [assemblyData, setAssemblyData] = React.useState({
-        passembly_code: '',
+        assembly_code: '',
         assembly_description: '',
         assembly_model_id: '',
         assembly_part_id: '',
@@ -34,10 +34,8 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
     });
     const assy = useSelector((state) => (currentId ? state.assembly.find((assy) => assy.assembly_id === currentId) : null));
     const partOptions = parts.map((part) => {
-        return { part_id: part.part_id, part_code: part.part_code };
+        return { id: part.part_id, label: part.part_code };
     });
-
-    console.log(partOptions);
 
     const handleDelete = () => {
         Swal.fire({
@@ -66,15 +64,13 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
             enableReinitialize={true}
             initialValues={assemblyData}
             validationSchema={Yup.object().shape({
-                passembly_code: Yup.string(4)
-                    .min(4, 'Minimum value is 4.')
-                    .max(50, 'Maximum value is 4.')
-                    .required('Model code is required'),
+                assembly_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('This field required'),
                 assembly_description: Yup.string(4).min(4, 'Minimum value is 4.').max(200, 'Maximum value is 50'),
-                assembly_model_id: Yup.number().required('Model is required.'),
-                assembly_part_id: Yup.number().required('Part is required.')
+                assembly_model_id: Yup.number().required('This field required.'),
+                assembly_part_id: Yup.number().required('This field required.')
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+                console.log(values);
                 try {
                     if (scriptedRef.current) {
                         if (currentId === 0) {
@@ -96,7 +92,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                 }
             }}
         >
-            {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, resetForm, values }) => (
+            {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, resetForm, values, setFieldValue }) => (
                 <form noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={1}>
                         <Grid item lg={4} md={4} sm={12}>
@@ -115,6 +111,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
                                 label="Description"
+                                id="assembly_description"
                                 name="assembly_description"
                                 value={values.assembly_description}
                                 onBlur={handleBlur}
@@ -130,16 +127,18 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JSelect
                                 label="Model"
-                                labelId="assembly_model_id"
-                                name="product_model_id"
-                                value={values.product_model_id}
+                                labelId="assembly_model_id-label"
+                                id="assembly_model_id"
+                                name="assembly_model_id"
+                                value={values.assembly_model_id}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
+                                touched={touched}
                                 errors={errors}
                             >
-                                {models.map((model, index) => {
+                                {models.map((model) => {
                                     return (
-                                        <MenuItem key={index} value={model.model_id}>
+                                        <MenuItem key={model.model_id} value={model.model_id}>
                                             {model.model_code}
                                         </MenuItem>
                                     );
@@ -151,10 +150,16 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JComboBox
                                 options={partOptions}
+                                id="assembly_part_id"
                                 name="assembly_part_id"
+                                label="Equivalent Part ID"
+                                value={values.assembly_part_id}
+                                getOptionLabel={(option) => option.label}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
+                                touched={touched}
                                 errors={errors}
+                                setFieldValue={setFieldValue}
                             />
                         </Grid>
                     </Grid>
@@ -168,6 +173,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                                     label="Status"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
+                                    touched={touched}
                                     errors={errors}
                                 >
                                     <MenuItem value="ACTIVE">ACTIVE</MenuItem>
@@ -180,7 +186,11 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                     )}
                     <Box sx={{ mt: 2 }}>
                         <ButtonGroup variant="contained" aria-label="outlined button group">
-                            <Button size="small" disabled={isSubmitting} type="submit">
+                            <Button
+                                size="small"
+                                // disabled={isSubmitting}
+                                type="submit"
+                            >
                                 Save
                             </Button>
                             <Button size="small" onClick={resetForm}>

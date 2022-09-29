@@ -8,6 +8,7 @@ export const LIKE = 'LIKE';
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 
+export const FETCH_MODELS = 'FETCH_MODELS';
 export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const FETCH_ASSEMBLY = 'FETCH_ASSEMBLY';
 export const FETCH_PART = 'FETCH_PARTS';

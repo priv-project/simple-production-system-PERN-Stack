@@ -17,6 +17,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
 
     const columns = [
+        { field: 'product_id', headerName: 'ID', width: 10 },
         { field: 'product_code', headerName: 'Product Code', width: 130 },
         { field: 'product_description', headerName: 'Description', width: 200 },
         { field: 'model_code', headerName: 'Model Code', width: 135 },

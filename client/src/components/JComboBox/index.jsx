@@ -1,6 +1,6 @@
 import * as React from 'react';
 // MUI
-import { FormControl, TextField, Autocomplete } from '@mui/material';
+import { FormControl, TextField, Autocomplete, FormHelperText } from '@mui/material';
 
 function MyFormHelperText() {
     const { focused } = useFormControl() || {};
@@ -15,16 +15,47 @@ function MyFormHelperText() {
     return <FormHelperText>{helperText}</FormHelperText>;
 }
 
-const JComboBox = ({ children, value, id, label, labelId, name, placeholder, type, onChange, onBlur, size, options }) => {
+const JComboBox = ({
+    children,
+    value,
+    id,
+    label,
+    labelId,
+    name,
+    placeholder,
+    type,
+    onChange,
+    onBlur,
+    size,
+    touched,
+    errors,
+    options,
+    getOptionLabel,
+    setFieldValue
+}) => {
+    let error = false;
+    if (errors[name] && touched[name]) error = true;
+
     return (
-        <FormControl fullWidth size={size ? size : 'small'}>
+        <FormControl fullWidth error={error}>
             <Autocomplete
-                size="small"
+                size={size ? size : 'small'}
+                name={name}
                 disablePortal
                 options={options}
-                getOptionLabel={(option) => option.part_code}
-                renderInput={(params) => <TextField {...params} label="Equivalent Part" />}
+                // onChange={onChange}
+                onChange={(event, newValue, type) => {
+                    if (type === 'clear') {
+                        setFieldValue(name, '');
+                    } else {
+                        setFieldValue(name, newValue.id);
+                    }
+                }}
+                onBlur={onBlur}
+                getOptionLabel={getOptionLabel}
+                renderInput={(params) => <TextField {...params} label={label} error={error} />}
             />
+            <FormHelperText>{errors[name]}</FormHelperText>
         </FormControl>
     );
 };

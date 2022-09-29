@@ -21,7 +21,7 @@ const JTextField = ({ value, label, name, placeholder, type, onChange, onBlur, s
     //     touched.user_username && errors.user_username;
     // }
     let error = false;
-    if (touched[name] && errors[name]) error = true;
+    if (errors[name] && touched[name]) error = true;
 
     if (type !== 'multiline') {
         return (

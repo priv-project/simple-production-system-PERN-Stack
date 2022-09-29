@@ -2,7 +2,7 @@ import * as actionTypes from 'constants/actionTypes';
 
 export default (models = [], action) => {
     switch (action.type) {
-        case actionTypes.FETCH_ALL:
+        case actionTypes.FETCH_MODELS:
             return action.payload.result;
         case actionTypes.CREATE:
             return [...models, action.payload.result];

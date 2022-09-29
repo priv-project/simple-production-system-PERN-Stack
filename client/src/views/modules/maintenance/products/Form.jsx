@@ -18,8 +18,9 @@ import { Formik } from 'formik';
 
 // ACTIONS
 import { createProduct, updateProduct, deleteProduct } from 'actions/products';
+import { getModels } from 'actions/models';
 
-const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
+const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
     const [productData, setProductData] = React.useState({
@@ -32,6 +33,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
         product_updated_at: ''
     });
     const product = useSelector((state) => (currentId ? state.products.find((product) => product.product_id === currentId) : null));
+    const models = useSelector((state) => state.models);
 
     const handleDelete = () => {
         Swal.fire({
@@ -53,6 +55,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
 
     React.useEffect(() => {
         if (product) setProductData(product);
+        dispatch(getModels());
     }, [product]);
 
     return (
@@ -60,9 +63,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
             enableReinitialize={true}
             initialValues={productData}
             validationSchema={Yup.object().shape({
-                product_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('Model code is required'),
-                product_description: Yup.string().max(200, 'Maximum value is 200.'),
-                product_model_id: Yup.number().required('Model is required'),
+                product_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 4.').required('This field is required'),
+                product_description: Yup.string().max(200, 'This field is required.'),
+                product_model_id: Yup.number().required('This field is required'),
                 product_remark: Yup.string().max(200, 'Maximum value is 200.')
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -121,16 +124,21 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JSelect
                                 label="Model"
-                                labelId="product_model_id"
+                                labelId="product_model_id-label"
                                 id="product_model_id"
                                 name="product_model_id"
                                 value={values.product_model_id}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
+                                touched={touched}
                                 errors={errors}
                             >
-                                {models.map((model) => {
-                                    return <MenuItem value={model.model_id}>{model.model_code}</MenuItem>;
+                                {models.map((model, index) => {
+                                    return (
+                                        <MenuItem key={index} value={model.model_id}>
+                                            {index}
+                                        </MenuItem>
+                                    );
                                 })}
                             </JSelect>
                         </Grid>
@@ -147,8 +155,12 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                                     onChange={handleChange}
                                     errors={errors}
                                 >
-                                    <MenuItem value="ACTIVE">ACTIVE</MenuItem>
-                                    <MenuItem value="INACTIVE">INACTIVE</MenuItem>
+                                    <MenuItem key={1} value="ACTIVE">
+                                        ACTIVE
+                                    </MenuItem>
+                                    <MenuItem key={2} value="INACTIVE">
+                                        INACTIVE
+                                    </MenuItem>
                                 </JSelect>
                             </Grid>
                         </Grid>

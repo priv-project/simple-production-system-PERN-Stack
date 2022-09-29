@@ -1,6 +1,6 @@
 import * as React from 'react';
 // MUI
-import { Select, InputLabel, FormControl } from '@mui/material';
+import { Select, InputLabel, FormControl, FormHelperText } from '@mui/material';
 
 function MyFormHelperText() {
     const { focused } = useFormControl() || {};
@@ -15,13 +15,17 @@ function MyFormHelperText() {
     return <FormHelperText>{helperText}</FormHelperText>;
 }
 
-const JSelect = ({ children, value, id, label, labelId, name, placeholder, type, onChange, onBlur, size, rows }) => {
+const JSelect = ({ children, value, id, label, labelId, name, placeholder, type, onChange, onBlur, size, rows, errors, touched }) => {
+    let error = false;
+    if (errors[name] && touched[name]) error = true;
+
     return (
-        <FormControl fullWidth size={size ? size : 'small'}>
+        <FormControl fullWidth size={size ? size : 'small'} error={error}>
             <InputLabel id={labelId}>{label}</InputLabel>
-            <Select labelId={labelId} id={id ? id : name} name={name} value={value} label={label} onBlur={onBlur} onChange={onChange}>
+            <Select labelId={labelId} id={id ? id : ''} name={name} value={value} label={label} onChange={onChange}>
                 {children}
             </Select>
+            <FormHelperText>{errors[name]}</FormHelperText>
         </FormControl>
     );
 };

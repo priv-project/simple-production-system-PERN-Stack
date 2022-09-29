@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 export const getModels = () => async (dispatch) => {
     try {
         const { data } = await api.fetchModels();
-        dispatch({ type: actionTypes.FETCH_ALL, payload: data });
+        dispatch({ type: actionTypes.FETCH_MODELS, payload: data });
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');

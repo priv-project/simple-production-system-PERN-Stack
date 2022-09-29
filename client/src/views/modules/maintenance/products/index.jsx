@@ -11,32 +11,23 @@ import ProductForm from './Form';
 import Toolbar from './Toolbar';
 
 import { getProducts } from 'actions/products';
-import { getModels } from 'actions/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
-    const models = useSelector((state) => state.models);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
 
     React.useEffect(() => {
         dispatch(getProducts());
-        dispatch(getModels());
     }, [currentId, dispatch]);
 
     return (
         <MainCard title="PRODUCTS">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />
             {formVisible ? (
-                <ProductForm
-                    currentId={currentId}
-                    setCurrentId={setCurrentId}
-                    formVisible={formVisible}
-                    setFormVisible={setFormVisible}
-                    models={models}
-                />
+                <ProductForm currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
             ) : (
                 <ProductGrid data={products} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
