@@ -15,7 +15,7 @@ export const getAssembly = () => async (dispatch) => {
 export const createAssembly = (assy, setFormVisible) => async (dispatch) => {
     try {
         const { data } = await api.createAssembly(assy);
-        dispatch({ type: actionTypes.CREATE, payload: data });
+        dispatch({ type: actionTypes.CREATE_ASSEMBLY, payload: data });
         setFormVisible(false);
         Swal.fire('Success!', 'Assy has been added successfully', 'success');
     } catch (error) {
@@ -27,7 +27,7 @@ export const createAssembly = (assy, setFormVisible) => async (dispatch) => {
 export const updateAssembly = (id, assy, setFormVisible) => async (dispatch) => {
     try {
         const { data } = await api.updateAssembly(id, assy);
-        dispatch({ type: actionTypes.UPDATE, payload: data });
+        dispatch({ type: actionTypes.UPDATE_ASSEMBLY, payload: data });
         setFormVisible(false);
         Swal.fire('Success!', 'Assy updated successfully', 'success');
     } catch (error) {
@@ -39,7 +39,7 @@ export const updateAssembly = (id, assy, setFormVisible) => async (dispatch) => 
 export const deleteAssembly = (id) => async (dispatch) => {
     try {
         await api.deleteAssembly(id);
-        dispatch({ type: actionTypes.DELETE, payload: id });
+        dispatch({ type: actionTypes.DELETE_ASSEMBLY, payload: id });
         Swal.fire('Success!', 'Assy deleted successfully', 'success');
     } catch (error) {
         console.log(error);

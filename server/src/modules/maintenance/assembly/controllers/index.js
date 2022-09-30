@@ -21,7 +21,7 @@ export const createAssembly = async (req, res) => {
 		assembly_model_id,
 		assembly_part_id,
 	} = req.body;
-
+	console.log(req.body);
 	try {
 		const lastInsertId = await pool.query(
 			`INSERT INTO assembly (assembly_code, assembly_description, assembly_model_id, assembly_part_id) VALUES ($1, $2, $3, $4) RETURNING assembly_id`,
@@ -92,7 +92,7 @@ export const deleteAssembly = async (req, res) => {
 
 const getAssemblyById = async (id) => {
 	const result = await pool.query(
-		`SELECT * FROM assembly WHERE assembly_id = $1`,
+		`SELECT * FROM vw_assembly WHERE assembly_id = $1`,
 		[id]
 	);
 	return result.rows[0];

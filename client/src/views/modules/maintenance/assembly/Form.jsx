@@ -75,9 +75,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models, parts }) => {
                     if (scriptedRef.current) {
                         if (currentId === 0) {
                             // , name: user?.result?.name
-                            dispatch(createProduct({ ...values }, setFormVisible));
+                            dispatch(createAssembly({ ...values }, setFormVisible));
                         } else {
-                            dispatch(updateProduct(currentId, { ...values }, setFormVisible));
+                            dispatch(updateAssembly(currentId, { ...values }, setFormVisible));
                         }
                         setStatus({ success: true });
                         setSubmitting(false);

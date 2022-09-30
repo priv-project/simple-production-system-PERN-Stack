@@ -6,7 +6,8 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import ProductGrid from './Grid';
+// import ProductGrid from './Grid';
+import ProductGrid from 'views/modules/maintenance/products/Grid';
 import ProductForm from './Form';
 import Toolbar from './Toolbar';
 
@@ -19,6 +20,7 @@ const ProductsPage = () => {
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
 
+    useSelector((state) => console.log(state));
     React.useEffect(() => {
         dispatch(getProducts());
     }, [currentId, dispatch]);

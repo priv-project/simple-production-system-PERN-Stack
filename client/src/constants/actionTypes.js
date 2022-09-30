@@ -1,14 +1,27 @@
-export const CREATE = 'CREATE';
-export const UPDATE = 'UPDATE';
-export const DELETE = 'DELETE';
-export const FETCH_ALL = 'FETCH_ALL';
-
-export const LIKE = 'LIKE';
-
+// AUTHENTICATION ACTIONS
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
 
+// MODEL ACTIONS
 export const FETCH_MODELS = 'FETCH_MODELS';
-export const FETCH_PRODUCT = 'FETCH_PRODUCT';
+export const CREATE_MODEL = 'CREATE_MODEL';
+export const UPDATE_MODEL = 'UPDATE_MODEL';
+export const DELETE_MODEL = 'DELETE_MODEL';
+
+// PRODUCTS ACTIONS
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+
+// ASSEMBLY ACTIONS
 export const FETCH_ASSEMBLY = 'FETCH_ASSEMBLY';
-export const FETCH_PART = 'FETCH_PARTS';
+export const CREATE_ASSEMBLY = 'CREATE_ASSEMBLY';
+export const UPDATE_ASSEMBLY = 'UPDATE_ASSEMBLY';
+export const DELETE_ASSEMBLY = 'DELETE_ASSEMBLY';
+
+// PARTS ACTIONS
+export const FETCH_PARTS = 'FETCH_PARTS';
+export const CREATE_PART = 'CREATE_PART';
+export const UPDATE_PART = 'UPDATE_PART';
+export const DELETE_PART = 'DELETE_PART';

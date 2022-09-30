@@ -136,7 +136,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                                 {models.map((model, index) => {
                                     return (
                                         <MenuItem key={index} value={model.model_id}>
-                                            {index}
+                                            {model.model_code}
                                         </MenuItem>
                                     );
                                 })}

@@ -6,8 +6,8 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import ProductGrid from './Grid';
-import ProductForm from './Form';
+import AssemblyGrid from './Grid';
+import AssemblyForm from './Form';
 import Toolbar from './Toolbar';
 
 import { getAssembly } from 'actions/assembly';
@@ -24,7 +24,8 @@ const AssemblyPage = () => {
 
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
-
+    console.log('assembly');
+    console.log(assembly);
     React.useEffect(() => {
         dispatch(getAssembly());
         dispatch(getModels());
@@ -34,7 +35,7 @@ const AssemblyPage = () => {
         <MainCard title="ASSEMBLY">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />
             {formVisible ? (
-                <ProductForm
+                <AssemblyForm
                     currentId={currentId}
                     setCurrentId={setCurrentId}
                     formVisible={formVisible}
@@ -43,7 +44,7 @@ const AssemblyPage = () => {
                     parts={parts}
                 />
             ) : (
-                <ProductGrid data={assembly} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
+                <AssemblyGrid data={assembly} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
         </MainCard>
     );
