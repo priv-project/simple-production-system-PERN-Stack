@@ -13,7 +13,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 // ACTIONS
 import { deleteProduct } from 'actions/products';
 
-const Grid = ({ data, setCurrentId, setFormVisible }) => {
+const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
 
     const columns = [
@@ -81,7 +81,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
             <DataGrid
                 rows={data}
                 columns={columns}
-                getRowId={(row) => row.product_id}
+                getRowId={(row) => row.part_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 // components={{ Toolbar: CustomToolbar }}
@@ -90,4 +90,4 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
     );
 };
 
-export default Grid;
+export default PartGrid;

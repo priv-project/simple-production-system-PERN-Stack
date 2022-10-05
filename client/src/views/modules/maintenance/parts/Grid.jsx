@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
 
 // MATERIAL ICONS
@@ -11,14 +11,15 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteProduct } from 'actions/products';
+import { deletePart } from 'actions/parts';
 
 const Grid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
 
     const columns = [
-        { field: 'product_code', headerName: 'Product Code', width: 130 },
-        { field: 'product_description', headerName: 'Description', width: 200 },
+        { field: 'part_code', headerName: 'Code', width: 130 },
+        { field: 'part_name', headerName: 'Name', width: 130 },
+        { field: 'part_description', headerName: 'Description', width: 200 },
         { field: 'model_code', headerName: 'Model Code', width: 135 },
         {
             field: 'actions',
@@ -64,7 +65,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteProduct(row.product_id));
+                dispatch(deletePart(row.part_id));
                 setCurrentId(0);
             }
         });
@@ -72,16 +73,16 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.product_id);
+        setCurrentId(row.part_id);
         setFormVisible(true);
     };
 
     return (
-        <div style={{ height: 300, width: '100%' }}>
+        <div style={{ height: 400, width: '100%' }}>
             <DataGrid
                 rows={data}
                 columns={columns}
-                getRowId={(row) => row.product_id}
+                getRowId={(row) => row.part_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 // components={{ Toolbar: CustomToolbar }}

@@ -83,7 +83,7 @@ export const deletePart = async (req, res) => {
 };
 
 const getPartById = async (id) => {
-	const result = await pool.query(`SELECT * FROM parts WHERE part_id = $1`, [
+	const result = await pool.query(`SELECT * FROM vw_parts WHERE part_id = $1`, [
 		id,
 	]);
 	return result.rows[0];

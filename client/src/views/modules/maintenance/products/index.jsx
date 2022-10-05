@@ -6,23 +6,32 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import SubCard from 'ui-component/cards/SubCard';
+
 // import ProductGrid from './Grid';
 import ProductGrid from 'views/modules/maintenance/products/Grid';
 import ProductForm from './Form';
-import Toolbar from './Toolbar';
+import AddPartGrid from './AddPartGrid';
+import { Toolbar, PartGridToolbar } from './Toolbar';
 
+// ACTIONS
 import { getProducts } from 'actions/products';
+import { getParts } from 'actions/parts';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
+    const parts = useSelector((state) => state.parts);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
 
-    useSelector((state) => console.log(state));
+    const [partFormVisible, setPartFormVisible] = React.useState(false);
+    const [partCurrentId, setPartCurrentId] = React.useState(0);
+
     React.useEffect(() => {
         dispatch(getProducts());
+        dispatch(getParts());
     }, [currentId, dispatch]);
 
     return (

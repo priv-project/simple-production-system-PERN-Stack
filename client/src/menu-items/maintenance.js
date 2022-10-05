@@ -38,6 +38,13 @@ const dashboard = {
                     type: 'item',
                     url: '/maintenance/assembly',
                     target: false
+                },
+                {
+                    id: 'parts',
+                    title: 'Parts',
+                    type: 'item',
+                    url: '/maintenance/parts',
+                    target: false
                 }
             ]
         }

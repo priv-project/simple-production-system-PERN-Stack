@@ -7,7 +7,7 @@ import { Button, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
-const Toolbar = ({ formVisible, setFormVisible, setCurrentId }) => {
+export const Toolbar = ({ formVisible, setFormVisible, setCurrentId }) => {
     const handleClick = () => {
         setFormVisible(!formVisible);
         setCurrentId(0);
@@ -22,4 +22,21 @@ const Toolbar = ({ formVisible, setFormVisible, setCurrentId }) => {
     );
 };
 
-export default Toolbar;
+export const PartGridToolbar = ({ addPartGridVisible, setAddPartGridVisible }) => {
+    const handleClick = () => {
+        setAddPartGridVisible(!addPartGridVisible);
+    };
+
+    return (
+        <Box sx={{ mb: 3 }}>
+            <Button
+                variant="outlined"
+                size="small"
+                startIcon={addPartGridVisible ? <KeyboardReturnIcon /> : <AddIcon />}
+                onClick={handleClick}
+            >
+                {addPartGridVisible ? 'Return' : 'Add'}
+            </Button>
+        </Box>
+    );
+};
