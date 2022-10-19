@@ -17,9 +17,9 @@ const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
 
     const columns = [
-        { field: 'product_code', headerName: 'Product Code', width: 130 },
-        { field: 'product_description', headerName: 'Description', width: 200 },
-        { field: 'model_code', headerName: 'Model Code', width: 135 },
+        { field: 'part_code', headerName: 'Part Code', width: 130 },
+        { field: 'part_description', headerName: 'Description', width: 200 },
+        { field: 'model_code', headerName: 'Model', width: 135 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -64,7 +64,7 @@ const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteProduct(row.product_id));
+                dispatch(deleteProduct(row.part_id));
                 setCurrentId(0);
             }
         });
@@ -72,7 +72,7 @@ const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.product_id);
+        setCurrentId(row.part_id);
         setFormVisible(true);
     };
 

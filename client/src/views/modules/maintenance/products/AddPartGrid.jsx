@@ -19,12 +19,13 @@ import { deleteProduct } from 'actions/products';
 
 const AddPartGrid = ({ data, setAddPartGridVisible }) => {
     const dispatch = useDispatch();
-    const apiRef = useGridApiRef();
-
+    let [selectionModel, setSelectionModel] = React.useState([]);
+    let [dataGrid, setDataGrid] = React.useState([]);
+    console.log(dataGrid);
     const CustomToolbar = () => {
         return (
             <GridToolbarContainer>
-                <Button size="small" startIcon={<SaveIcon />} sx={{ fontWeight: '600' }}>
+                <Button size="small" startIcon={<SaveIcon />} sx={{ fontWeight: '600' }} onClick={handleSave}>
                     SAVE
                 </Button>
             </GridToolbarContainer>
@@ -37,54 +38,53 @@ const AddPartGrid = ({ data, setAddPartGridVisible }) => {
             field: 'part_usage',
             headerName: 'Usage',
             width: 150,
-            renderCell: (params) => {
-                return (
-                    <TextField
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        defaultValue={1}
-                        variant="standard"
-                        onChange={() => {
-                            // console.log(apiRef);
-                        }}
-                    />
-                );
-            }
+            valueGetter: function getFullName(params) {
+                return 1;
+            },
+            editable: true
+            // renderCell: (params) => {
+            //     return (
+            //         <TextField
+            //             type="number"
+            //             InputLabelProps={{
+            //                 shrink: true
+            //             }}
+            //             defaultValue={1}
+            //             variant="standard"
+            //             onChange={(e) => {
+            //                 setSelectionModel((selectionModel) => {
+            //                     if (selectionModel.includes(params.id)) {
+            //                         return selectionModel; // return if already selected
+            //                     }
+
+            //                     return [...selectionModel, params.id];
+            //                 });
+
+            //                 setDataGrid([...dataGrid, { part_id: params.id, part_usage: e.target.value }]);
+            //                 console.log(dataGrid);
+            //             }}
+            //         />
+            //     );
+            // }
         }
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     renderCell: (params) => {
-        //         return (
-        //             <Box>
-        //                 <VisibilityIcon
-        //                     onClick={(e) => handleView(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'grey[50]',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //                 <DeleteOutlineIcon
-        //                     onClick={(e) => handleDelete(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'error.main',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //             </Box>
-        //         );
-        //     }
-        // }
     ];
 
+    const handleSave = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // dispatch(deleteProduct(row.product_id));
+                // setCurrentId(0);
+            }
+        });
+    };
     const handleDelete = (e, row) => {
         e.stopPropagation();
         Swal.fire({
@@ -115,13 +115,20 @@ const AddPartGrid = ({ data, setAddPartGridVisible }) => {
                 rows={data}
                 columns={columns}
                 getRowId={(row) => row.part_id}
-                pageSize={5}
-                rowHeight={38}
-                rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
                 components={{ Toolbar: CustomToolbar }}
-                apiRef={apiRef}
+                selectionModel={selectionModel}
+                onSelectionModelChange={(newSelectionModel) => {
+                    setSelectionModel(newSelectionModel); // Handle default Data Grid selection
+
+                    const selectedRowsData = newSelectionModel.map((id) => rows.find((row) => row.id === id));
+                    console.log(selectedRowsData);
+                }}
+                pageSize={5}
+                rowHeight={38}
+                rowsPerPageOptions={[5]}
+                experimentalFeatures={{ newEditingApi: true }}
             />
         </div>
     );

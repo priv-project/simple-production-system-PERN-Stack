@@ -191,7 +191,7 @@ const FirebaseLogin = ({ ...others }) => {
                                     size="large"
                                     type="submit"
                                     variant="contained"
-                                    color="secondary"
+                                    color="primary"
                                 >
                                     Sign in
                                 </Button>
