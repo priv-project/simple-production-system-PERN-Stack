@@ -78,14 +78,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
 
     return (
         <div style={{ height: 300, width: '100%' }}>
-            <DataGrid
-                rows={data}
-                columns={columns}
-                getRowId={(row) => row.product_id}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                // components={{ Toolbar: CustomToolbar }}
-            />
+            <DataGrid rows={data} columns={columns} getRowId={(row) => row.product_id} pageSize={5} rowsPerPageOptions={[5]} />
         </div>
     );
 };

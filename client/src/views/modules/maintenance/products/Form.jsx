@@ -205,7 +205,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                     <SubCard title="Product BOM" sx={{ mt: 4 }}>
                         <PartGridToolbar addPartGridVisible={addPartGridVisible} setAddPartGridVisible={setAddPartGridVisible} />
                         {addPartGridVisible ? (
-                            <AddPartGrid setAddPartGridVisible={setAddPartGridVisible} data={parts} />
+                            <AddPartGrid setAddPartGridVisible={setAddPartGridVisible} data={parts} currentId={currentId} />
                         ) : (
                             <PartGrid data={parts} />
                         )}

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 
 // MATERIAL ICONS
 import SaveIcon from '@mui/icons-material/Save';
@@ -54,23 +52,28 @@ const columns = [
     }
 ];
 
+const useApiRef = () => {
+    const apiRef = React.useRef(null);
+    const _columns = React.useMemo(() => columns, [columns]);
+
+    return { apiRef, columns: _columns };
+};
+
 const useFakeMutation = () => {
     return React.useCallback(
-        (data) =>
-            new Promise((resolve, reject) =>
+        (user) =>
+            new Promise((resolve) =>
                 setTimeout(() => {
-                    resolve({ ...data });
+                    resolve(user);
                 }, 200)
             ),
         []
     );
 };
 
-export default function DataGridDemo({ data, currentId }) {
+export default function DataGridDemo({ data }) {
     const mutateRow = useFakeMutation();
-    const [snackbar, setSnackbar] = React.useState(null);
-    const [finalData, setFinalData] = React.useState([]);
-    const handleCloseSnackbar = () => setSnackbar(null);
+    const { apiRef, columns } = useApiRef();
     let [selectionModel, setSelectionModel] = React.useState([]);
 
     let rows = data.map((value) => {
@@ -90,45 +93,35 @@ export default function DataGridDemo({ data, currentId }) {
         );
     };
 
-    const processRowUpdate = React.useCallback(
-        async (newRow) => {
-            // Make the HTTP request to save in the backend
-            const response = await mutateRow(newRow);
-            return response;
-        },
-        [mutateRow]
-    );
+    const handleSave = () => {};
 
-    const handleProcessRowUpdateError = React.useCallback((error) => {
-        alert('something went wrong');
-        console.error(error);
-    }, []);
-
-    const handleSave = () => {
-        console.log();
-    };
+    // const handleEditRowsModelChange = React.useCallback((model) => {
+    //     console.log(model);
+    //     setEditRowsModel(model);
+    // }, []);
 
     return (
         <Box sx={{ height: 400, width: '100%' }}>
-            {currentId} <br />
-            {selectionModel.join(', ').toString()}
             <DataGrid
                 rows={rows}
                 columns={columns}
                 getRowId={(row) => row.part_id}
-                columnVisibilityModel={{ part_id: false }}
                 components={{ Toolbar: CustomToolbar }}
-                checkboxSelection
-                disableSelectionOnClick
-                processRowUpdate={processRowUpdate}
-                onProcessRowUpdateError={handleProcessRowUpdateError}
-                selectionModel={selectionModel}
-                onSelectionModelChange={(newSelectionModel) => {
-                    setSelectionModel(newSelectionModel); // Handle default Data Grid selection
-                }}
-                experimentalFeatures={{ newEditingApi: true }}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                checkboxSelection
+                disableSelectionOnClick
+                // selectionModel={selectionModel}
+                // onSelectionModelChange={(newSelectionModel) => {
+                //     setSelectionModel(newSelectionModel); // Handle default Data Grid selection
+
+                //     const selectedRowsData = newSelectionModel.map((id) => rows.find((row) => row.id === id));
+                //     console.log(selectedRowsData);
+                // }}
+                columnVisibilityModel={{
+                    part_id: false
+                }}
+                // experimentalFeatures={{ newEditingApi: true }}
             />
         </Box>
     );

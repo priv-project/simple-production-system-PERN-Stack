@@ -14,12 +14,15 @@
         "@mui/system": "^5.8.6",
         "@mui/utils": "^5.8.6",
         "@mui/x-data-grid": "^5.17.4",
+        "@mui/x-data-grid-generator": "^5.17.7",
         "@reduxjs/toolkit": "^1.8.5",
         "@tabler/icons": "^1.72.0",
+        "add": "^2.0.6",
         "apexcharts": "^3.35.3",
         "axios": "^0.27.2",
         "formik": "^2.2.9",
         "framer-motion": "^6.3.16",
+        "material-react-table": "^1.2.10",
         "material-ui-popup-state": "^4.0.1",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
@@ -33,6 +36,7 @@
         "react-scripts": "^5.0.1",
         "redux": "^4.2.0",
         "sweetalert2": "^11.4.34",
+        "yarn": "^1.22.19",
         "yup": "^0.32.11"
     },
     "scripts": {

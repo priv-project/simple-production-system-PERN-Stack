@@ -11,7 +11,6 @@ import SubCard from 'ui-component/cards/SubCard';
 // import ProductGrid from './Grid';
 import ProductGrid from 'views/modules/maintenance/products/Grid';
 import ProductForm from './Form';
-import AddPartGrid from './AddPartGrid';
 import { Toolbar, PartGridToolbar } from './Toolbar';
 
 // ACTIONS

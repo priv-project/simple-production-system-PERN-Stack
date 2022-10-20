@@ -35,7 +35,7 @@ export const PartGridToolbar = ({ addPartGridVisible, setAddPartGridVisible }) =
                 startIcon={addPartGridVisible ? <KeyboardReturnIcon /> : <AddIcon />}
                 onClick={handleClick}
             >
-                {addPartGridVisible ? 'Return' : 'Add'}
+                {addPartGridVisible ? 'Return' : 'Add BOM'}
             </Button>
         </Box>
     );
