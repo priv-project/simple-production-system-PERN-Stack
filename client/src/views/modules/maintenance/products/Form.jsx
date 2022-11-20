@@ -39,7 +39,11 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     });
     const product = useSelector((state) => (currentId ? state.products.find((product) => product.product_id === currentId) : null));
     const models = useSelector((state) => state.models);
-    const parts = useSelector((state) => state.parts);
+    const parts = useSelector((state) => {
+        return state.parts.map((e) => {
+            return { ...e, part_usage: 1 };
+        });
+    });
 
     const [addPartGridVisible, setAddPartGridVisible] = React.useState(false);
 

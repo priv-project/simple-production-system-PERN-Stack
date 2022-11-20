@@ -10,6 +10,7 @@
 	"editor.largeFileOptimizations": false,
 	"editor.minimap.showSlider": "always",
 	"editor.codeActionsOnSave": {
+	
 		"source.fixAll.eslint": true
 	},
 	"eslint.workingDirectories": [
@@ -17,7 +18,7 @@
 		"./server"
 	],
 	"files.exclude": {
-		"**/.git": false,
+		"**/.git": false
 	},
 	"settingsSync.ignoredSettings": [],
 	"[typescriptreact]": {
@@ -49,8 +50,8 @@
 	"editor.detectIndentation": false,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"[javascript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
 	"editor.tabSize": 2,
-	"php.validate.executablePath": "",
+	"php.validate.executablePath": ""
 }

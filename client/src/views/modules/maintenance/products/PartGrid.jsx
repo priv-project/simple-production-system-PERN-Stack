@@ -17,9 +17,9 @@ const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
 
     const columns = [
-        { field: 'part_code', headerName: 'Part Code', width: 130 },
-        { field: 'part_description', headerName: 'Description', width: 200 },
-        { field: 'model_code', headerName: 'Model', width: 135 },
+        { field: 'part_code', headerName: 'Part Code', minWidth: 130, flex: 1 },
+        { field: 'part_description', headerName: 'Description', minWidth: 200, flex: 1 },
+        { field: 'model_code', headerName: 'Model', minWidth: 135, flex: 1 },
         {
             field: 'actions',
             headerName: 'Actions',

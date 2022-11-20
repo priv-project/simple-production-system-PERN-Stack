@@ -10,6 +10,8 @@ export default (products = [], action) => {
             return products.map((product) => (product.product_id === action.payload.result.product_id ? action.payload.result : product));
         case actionTypes.DELETE_PRODUCT:
             return products.filter((product) => product.product_id !== action.payload);
+        // case actionTypes.FETCH_PRODUCT_PARTS:
+        //     return products.filter((product) => product.product_id !== action.payload);
         default:
             return products;
     }
