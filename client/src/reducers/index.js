@@ -7,6 +7,7 @@ import models from 'reducers/models';
 import products from 'reducers/products';
 import assembly from 'reducers/assembly';
 import parts from 'reducers/parts';
+import product_parts from 'reducers/product_parts';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     models,
     products,
     assembly,
-    parts
+    parts,
+    product_parts
 });
 
 export default reducer;

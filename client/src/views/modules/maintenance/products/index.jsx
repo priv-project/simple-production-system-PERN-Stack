@@ -39,7 +39,7 @@ const ProductsPage = () => {
             {formVisible ? (
                 <ProductForm currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
             ) : (
-                <ProductGrid data={products} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
+                <ProductGrid currentId={currentId} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
         </MainCard>
     );

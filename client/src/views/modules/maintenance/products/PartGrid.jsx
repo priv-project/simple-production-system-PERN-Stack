@@ -11,10 +11,17 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteProduct } from 'actions/products';
+import { getProductParts } from 'actions/product_parts';
 
-const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
+const PartGrid = ({ currentId, setCurrentId }) => {
     const dispatch = useDispatch();
+    const data = useSelector((state) => state.product_parts).filter((e) => {
+        return e.product_id === currentId;
+    });
+    console.log(data);
+    React.useEffect(() => {
+        dispatch(getProductParts());
+    }, [dispatch, currentId]);
 
     const columns = [
         { field: 'part_code', headerName: 'Part Code', minWidth: 130, flex: 1 },
@@ -64,7 +71,7 @@ const PartGrid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteProduct(row.part_id));
+                // dispatch(deleteProduct(row.part_id));
                 setCurrentId(0);
             }
         });

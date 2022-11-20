@@ -11,10 +11,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteProduct } from 'actions/products';
+import { deleteProduct, getProducts } from 'actions/products';
 
-const Grid = ({ data, setCurrentId, setFormVisible }) => {
+const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
+    const data = useSelector((state) => state.products);
+    React.useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch, currentId]);
 
     const columns = [
         { field: 'product_code', headerName: 'Product Code', width: 130 },

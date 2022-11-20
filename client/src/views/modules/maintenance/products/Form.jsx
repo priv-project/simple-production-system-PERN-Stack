@@ -206,12 +206,12 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
             </Formik>
             {currentId !== 0 ? (
                 <Box>
-                    <SubCard title="Product BOM" sx={{ mt: 4 }}>
+                    <SubCard title="Bill of Materials" sx={{ mt: 4 }}>
                         <PartGridToolbar addPartGridVisible={addPartGridVisible} setAddPartGridVisible={setAddPartGridVisible} />
                         {addPartGridVisible ? (
                             <AddPartGrid setAddPartGridVisible={setAddPartGridVisible} data={parts} currentId={currentId} />
                         ) : (
-                            <PartGrid data={parts} />
+                            <PartGrid currentId={currentId} />
                         )}
                     </SubCard>
                 </Box>

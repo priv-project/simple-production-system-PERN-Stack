@@ -41,9 +41,6 @@ export default function DataGridDemo({ data, currentId }) {
                 return (
                     <OutlinedInput
                         type="number"
-                        InputLabelProps={{
-                            shrink: true
-                        }}
                         defaultValue={params.row.part_usage}
                         onChange={(e) => {
                             params.api.updateRows([{ ...params.row, part_usage: parseInt(e.target.value) }]);
