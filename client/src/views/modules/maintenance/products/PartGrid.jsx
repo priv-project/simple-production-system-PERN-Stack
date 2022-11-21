@@ -5,19 +5,31 @@ import Swal from 'sweetalert2';
 // MATERIAL UI
 import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
+import { Button } from '@mui/material';
 
 // MATERIAL ICONS
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import AddIcon from '@mui/icons-material/Add';
 
 // ACTIONS
 import { getProductParts } from 'actions/product_parts';
 
-const PartGrid = ({ currentId }) => {
+const PartGrid = ({ currentId, setAddPartGridVisible }) => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.product_parts).filter((e) => {
         return e.product_id === currentId;
     });
+
+    const CustomToolbar = () => {
+        return (
+            <GridToolbarContainer>
+                <Button size="small" startIcon={<AddIcon />} sx={{ fontWeight: '600' }} onClick={() => setAddPartGridVisible(true)}>
+                    Add Product BOM
+                </Button>
+            </GridToolbarContainer>
+        );
+    };
 
     React.useEffect(() => {
         dispatch(getProductParts(currentId));
@@ -91,7 +103,7 @@ const PartGrid = ({ currentId }) => {
                 getRowId={(row) => row.part_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                // components={{ Toolbar: CustomToolbar }}
+                components={{ Toolbar: CustomToolbar }}
             />
         </div>
     );

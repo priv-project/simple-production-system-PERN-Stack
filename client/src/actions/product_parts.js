@@ -12,10 +12,11 @@ export const getProductParts = (id) => async (dispatch) => {
     }
 };
 
-export const createProductPart = (id, formData) => async (dispatch) => {
+export const createProductPart = (id, formData, setAddPartGridVisible) => async (dispatch) => {
     try {
         const { data } = await api.createProductPart(id, formData);
         dispatch({ type: actionTypes.CREATE_PRODUCT_PART, payload: data });
+        console.log(setAddPartGridVisible(false));
         Swal.fire('Success!', 'Product part has been added.', 'success');
     } catch (error) {
         console.log(error);

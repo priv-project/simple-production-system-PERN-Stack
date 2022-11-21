@@ -8,13 +8,13 @@ import Alert from '@mui/material/Alert';
 
 // MATERIAL ICONS
 import SaveIcon from '@mui/icons-material/Save';
-import { element } from 'prop-types';
-import { ContactPageSharp } from '@mui/icons-material';
+// import { element } from 'prop-types';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 // ACTIONS
 import { createProductPart } from 'actions/product_parts';
 
-export default function DataGridDemo({ data, currentId }) {
+export default function DataGridDemo({ data, currentId, setAddPartGridVisible }) {
     const dispatch = useDispatch();
     const apiRef = React.useRef(null);
 
@@ -66,6 +66,14 @@ export default function DataGridDemo({ data, currentId }) {
     const CustomToolbar = () => {
         return (
             <GridToolbarContainer>
+                <Button
+                    size="small"
+                    startIcon={<KeyboardReturnIcon />}
+                    sx={{ fontWeight: '600' }}
+                    onClick={() => setAddPartGridVisible(false)}
+                >
+                    Return
+                </Button>
                 <Button size="small" startIcon={<SaveIcon />} sx={{ fontWeight: '600' }} onClick={handleSave}>
                     Add
                 </Button>
@@ -83,8 +91,7 @@ export default function DataGridDemo({ data, currentId }) {
                 const model = element[1];
                 return model;
             });
-        console.log(formData);
-        dispatch(createProductPart(currentId, formData));
+        dispatch(createProductPart(currentId, [...formData], setAddPartGridVisible));
     };
 
     return (

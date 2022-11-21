@@ -14,7 +14,6 @@ import JTextField from 'components/JTextField';
 import JSelect from 'components/JSelect';
 import PartGrid from './PartGrid';
 import AddPartGrid from './AddPartGrid';
-import { PartGridToolbar } from './Toolbar';
 
 // third party
 import * as Yup from 'yup';
@@ -207,11 +206,10 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
             {currentId !== 0 ? (
                 <Box>
                     <SubCard title="Bill of Materials" sx={{ mt: 4 }}>
-                        <PartGridToolbar addPartGridVisible={addPartGridVisible} setAddPartGridVisible={setAddPartGridVisible} />
                         {addPartGridVisible ? (
                             <AddPartGrid setAddPartGridVisible={setAddPartGridVisible} data={parts} currentId={currentId} />
                         ) : (
-                            <PartGrid currentId={currentId} />
+                            <PartGrid currentId={currentId} setAddPartGridVisible={setAddPartGridVisible} />
                         )}
                     </SubCard>
                 </Box>
