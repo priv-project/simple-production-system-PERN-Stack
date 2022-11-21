@@ -13,14 +13,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 // ACTIONS
 import { getProductParts } from 'actions/product_parts';
 
-const PartGrid = ({ currentId, setCurrentId }) => {
+const PartGrid = ({ currentId }) => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.product_parts).filter((e) => {
         return e.product_id === currentId;
     });
-    console.log(data);
+
     React.useEffect(() => {
-        dispatch(getProductParts());
+        dispatch(getProductParts(currentId));
     }, [dispatch, currentId]);
 
     const columns = [
@@ -72,14 +72,14 @@ const PartGrid = ({ currentId, setCurrentId }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // dispatch(deleteProduct(row.part_id));
-                setCurrentId(0);
+                // setCurrentId(0);
             }
         });
     };
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.part_id);
+        // setCurrentId(row.part_id);
         setFormVisible(true);
     };
 

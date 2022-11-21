@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { Box, Button, OutlinedInput } from '@mui/material';
 import { DataGrid, GridToolbarContainer, useGridApiRef } from '@mui/x-data-grid';
 import useApiRef from 'hooks/useApiRef';
@@ -10,7 +11,11 @@ import SaveIcon from '@mui/icons-material/Save';
 import { element } from 'prop-types';
 import { ContactPageSharp } from '@mui/icons-material';
 
+// ACTIONS
+import { createProductPart } from 'actions/product_parts';
+
 export default function DataGridDemo({ data, currentId }) {
+    const dispatch = useDispatch();
     const apiRef = React.useRef(null);
 
     const gridColumns = [
@@ -79,6 +84,7 @@ export default function DataGridDemo({ data, currentId }) {
                 return model;
             });
         console.log(formData);
+        dispatch(createProductPart(currentId, formData));
     };
 
     return (

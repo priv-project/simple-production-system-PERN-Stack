@@ -22,7 +22,8 @@ export const createProduct = (newProduct) => API.post('/maintenance/products', n
 export const updateProduct = (id, updateProduct) => API.patch(`/maintenance/products/${id}`, updateProduct);
 export const deleteProduct = (id) => API.delete(`/maintenance/products/${id}`);
 
-export const fetchProductParts = () => API.get(`/maintenance/products/product-parts`);
+export const fetchProductParts = (id) => API.get(`/maintenance/products/product-parts/${id}`);
+export const createProductPart = (id, formData) => API.post(`/maintenance/products/product-parts/${id}`, formData);
 
 export const fetchAssembly = () => API.get('/maintenance/assembly');
 export const createAssembly = (newAssembly) => API.post('/maintenance/assembly', newAssembly);
