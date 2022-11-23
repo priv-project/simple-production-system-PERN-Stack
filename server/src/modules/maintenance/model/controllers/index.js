@@ -4,7 +4,7 @@ const router = express.Router();
 
 export const getModel = async (req, res) => {
 	try {
-		let result = await pool.query(`SELECT * FROM models ORDER BY model_code`);
+		let result = await pool.query(`SELECT * FROM model ORDER BY model_code`);
 		result = result.rows;
 		res.status(201).json({ result });
 	} catch (error) {
@@ -16,13 +16,13 @@ export const createModel = async (req, res) => {
 	const { model_code, model_description } = req.body;
 	try {
 		const oldModel = await pool.query(
-			"SELECT * FROM models WHERE model_code = $1",
+			"SELECT * FROM model WHERE model_code = $1",
 			[model_code]
 		);
 		if (oldModel.rowCount > 0)
 			return res.status(500).json({ message: "Model already exist!" });
 		const lastInsertId = await pool.query(
-			`INSERT INTO models (model_code, model_description) VALUES ($1, $2) RETURNING model_id`,
+			`INSERT INTO model (model_code, model_description) VALUES ($1, $2) RETURNING model_id`,
 			[model_code, model_description]
 		);
 		const result = await getModelById(lastInsertId.rows[0].model_id);
@@ -42,7 +42,7 @@ export const updateModel = async (req, res) => {
 			return res.status(404).json({ message: `No model with id: ${id}` });
 
 		await pool.query(
-			`UPDATE models SET model_code = $1, model_description = $2, model_status = $3, model_updated_at = NOW() WHERE model_id = ${id}`,
+			`UPDATE model SET model_code = $1, model_description = $2, model_status = $3, model_updated_at = NOW() WHERE model_id = ${id}`,
 			[model_code, model_description, model_status]
 		);
 		let result = await getModelById(id);
@@ -55,7 +55,7 @@ export const updateModel = async (req, res) => {
 export const deleteModel = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const result = await pool.query(`DELETE FROM models WHERE model_id = $1`, [
+		const result = await pool.query(`DELETE FROM model WHERE model_id = $1`, [
 			id,
 		]);
 		res.status(201).json({ result: result.rowCount });
@@ -65,7 +65,7 @@ export const deleteModel = async (req, res) => {
 };
 
 const getModelById = async (id) => {
-	const result = await pool.query(`SELECT * FROM models WHERE model_id = $1`, [
+	const result = await pool.query(`SELECT * FROM model WHERE model_id = $1`, [
 		id,
 	]);
 	return result.rows[0];

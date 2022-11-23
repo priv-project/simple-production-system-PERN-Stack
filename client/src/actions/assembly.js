@@ -42,7 +42,16 @@ export const deleteAssembly = (id) => async (dispatch) => {
         dispatch({ type: actionTypes.DELETE_ASSEMBLY, payload: id });
         Swal.fire('Success!', 'Assy deleted successfully', 'success');
     } catch (error) {
-        console.log(error);
-        Swal.fire('Error!', 'Something went wrong', 'error');
+        dispatch({
+            type: actionTypes.ERROR,
+            payload: {
+                isError: true,
+                data: error
+            }
+        });
+
+        setTimeout(() => {
+            dispatch({ type: actionTypes.UPDATE_ERROR });
+        }, 3000);
     }
 };

@@ -11,6 +11,7 @@ import {
 import {
 	getProductParts,
 	createProductPart,
+	getProductBom,
 } from "../controllers/product_parts.js";
 
 router.get("/", getProduct);
@@ -19,5 +20,6 @@ router.patch("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 
 router.get("/product-parts/:id", getProductParts);
+router.get("/product-bom/:id", getProductBom);
 router.post("/product-parts/:id", createProductPart);
 export default router;

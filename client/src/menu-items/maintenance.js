@@ -19,17 +19,17 @@ const dashboard = {
 
             children: [
                 {
-                    id: 'models',
-                    title: 'Models',
+                    id: 'model',
+                    title: 'Model',
                     type: 'item',
-                    url: '/maintenance/models',
+                    url: '/maintenance/model',
                     target: false
                 },
                 {
-                    id: 'products',
-                    title: 'Products',
+                    id: 'product',
+                    title: 'Product',
                     type: 'item',
-                    url: '/maintenance/products',
+                    url: '/maintenance/product',
                     target: false
                 },
                 {
@@ -40,10 +40,10 @@ const dashboard = {
                     target: false
                 },
                 {
-                    id: 'parts',
-                    title: 'Parts',
+                    id: 'part',
+                    title: 'Part',
                     type: 'item',
-                    url: '/maintenance/parts',
+                    url: '/maintenance/part',
                     target: false
                 }
             ]

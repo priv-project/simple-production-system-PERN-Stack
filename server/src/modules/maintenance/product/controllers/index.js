@@ -5,7 +5,7 @@ const router = express.Router();
 export const getProduct = async (req, res) => {
 	try {
 		let result = await pool.query(
-			`SELECT * FROM vw_products ORDER BY product_code, model_code`
+			`SELECT * FROM vw_product ORDER BY product_code, model_code`
 		);
 		result = result.rows;
 		res.status(201).json({ result });
@@ -24,7 +24,7 @@ export const createProduct = async (req, res) => {
 
 	try {
 		const lastInsertId = await pool.query(
-			`INSERT INTO products (product_code, product_description, product_model_id, product_remark) 
+			`INSERT INTO product (product_code, product_description, product_model_id, product_remark) 
             VALUES ($1, $2, $3, $4) RETURNING product_id`,
 			[product_code, product_description, product_model_id, product_remark]
 		);
@@ -51,7 +51,7 @@ export const updateProduct = async (req, res) => {
 			return res.status(404).json({ message: `No product with id: ${id}` });
 
 		await pool.query(
-			`UPDATE products SET product_code = $1, product_description = $2, product_model_id = $3, product_status = $4, product_remark = $5, product_updated_at = NOW() WHERE product_id = ${id}`,
+			`UPDATE product SET product_code = $1, product_description = $2, product_model_id = $3, product_status = $4, product_remark = $5, product_updated_at = NOW() WHERE product_id = ${id}`,
 			[
 				product_code,
 				product_description,
@@ -72,7 +72,7 @@ export const deleteProduct = async (req, res) => {
 	const { id } = req.params;
 	try {
 		const result = await pool.query(
-			`DELETE FROM products WHERE product_id = $1`,
+			`DELETE FROM product WHERE product_id = $1`,
 			[id]
 		);
 		res.status(201).json({ result: result.rowCount });
@@ -83,7 +83,7 @@ export const deleteProduct = async (req, res) => {
 
 const getProductById = async (id) => {
 	const result = await pool.query(
-		`SELECT * FROM products WHERE product_id = $1`,
+		`SELECT * FROM product WHERE product_id = $1`,
 		[id]
 	);
 	return result.rows[0];

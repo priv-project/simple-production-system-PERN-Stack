@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 // reducer import
 import customizationReducer from 'store/customizationReducer';
 import auth from 'reducers/auth';
+import error from 'reducers/error';
 import models from 'reducers/models';
 import products from 'reducers/products';
 import assembly from 'reducers/assembly';
@@ -13,6 +14,7 @@ import product_parts from 'reducers/product_parts';
 
 const reducer = combineReducers({
     customization: customizationReducer,
+    error,
     auth,
     models,
     products,

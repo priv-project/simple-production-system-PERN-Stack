@@ -41,12 +41,21 @@ export const updateModel = (id, model, setFormVisible) => async (dispatch) => {
 
 export const deleteModel = (id) => async (dispatch) => {
     try {
-        await await api.deleteModel(id);
+        await api.deleteModel(id);
 
         dispatch({ type: actionTypes.DELETE_MODEL, payload: id });
         Swal.fire('Success!', 'Model deleted successfully', 'success');
     } catch (error) {
-        console.log(error);
-        Swal.fire('Error!', 'Something went wrong', 'error');
+        dispatch({
+            type: actionTypes.ERROR,
+            payload: {
+                isError: true,
+                data: error
+            }
+        });
+
+        setTimeout(() => {
+            dispatch({ type: actionTypes.UPDATE_ERROR });
+        }, 3000);
     }
 };

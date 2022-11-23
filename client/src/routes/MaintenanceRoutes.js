@@ -28,11 +28,11 @@ const MaintenanceRoutes = {
     element: <MainLayout />,
     children: [
         {
-            path: 'models',
+            path: 'model',
             element: <ModelsPage />
         },
         {
-            path: 'products',
+            path: 'product',
             element: <ProductsPage />
         },
         {
@@ -40,7 +40,7 @@ const MaintenanceRoutes = {
             element: <AssemblyPage />
         },
         {
-            path: 'parts',
+            path: 'part',
             element: <PartsPage />
         }
         // {

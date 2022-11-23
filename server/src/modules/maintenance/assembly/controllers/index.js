@@ -29,7 +29,7 @@ export const createAssembly = async (req, res) => {
 		);
 		// UPDATED part status flag to true;
 		await pool.query(
-			`UPDATE parts SET part_assy_flag = true WHERE part_id = $1`,
+			`UPDATE part SET part_assy_flag = true WHERE part_id = $1`,
 			[assembly_part_id]
 		);
 

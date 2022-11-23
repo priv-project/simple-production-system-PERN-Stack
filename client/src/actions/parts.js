@@ -41,12 +41,21 @@ export const updatePart = (id, part, setFormVisible) => async (dispatch) => {
 
 export const deletePart = (id) => async (dispatch) => {
     try {
-        await await api.deletePart(id);
+        await api.deletePart(id);
 
         dispatch({ type: actionTypes.DELETE_PART, payload: id });
         Swal.fire('Success!', 'Part deleted successfully', 'success');
     } catch (error) {
-        console.log(error);
-        Swal.fire('Error!', 'Something went wrong', 'error');
+        dispatch({
+            type: actionTypes.ERROR,
+            payload: {
+                isError: true,
+                data: error
+            }
+        });
+
+        setTimeout(() => {
+            dispatch({ type: actionTypes.UPDATE_ERROR });
+        }, 3000);
     }
 };
