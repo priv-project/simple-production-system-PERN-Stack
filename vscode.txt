@@ -10,9 +10,11 @@
 	"editor.largeFileOptimizations": false,
 	"editor.minimap.showSlider": "always",
 	"editor.codeActionsOnSave": {
-	
 		"source.fixAll.eslint": true
 	},
+	"eslint.validate": [
+		"javascript"
+	],
 	"eslint.workingDirectories": [
 		"./client",
 		"./server"
@@ -45,7 +47,7 @@
 	"[javascriptreact]": {
 		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 	},
-	"window.zoomLevel": -1,
+	"window.zoomLevel": 1,
 	"editor.fontLigatures": false,
 	"editor.detectIndentation": false,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",

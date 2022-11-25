@@ -1,14 +1,21 @@
 {
-	"name": "test-server",
+	"name": "Server-API",
 	"version": "1.0.0",
 	"description": "",
 	"type": "module",
+	"main": "./src/index.js",
+	"imports": {
+		"#root/*": "./src/*",
+		"#module/*": "./src/modules/*"
+	},
 	"scripts": {
-		"start": "nodemon ./src/index.js"
+		"start": "nodemon",
+		"dev-fix": "yarn eslint --fix ./src --ext .js"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"app-module-path": "^2.2.0",
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
@@ -18,13 +25,5 @@
 		"nodemon": "^2.0.19",
 		"pg": "^8.8.0",
 		"validator": "^13.7.0"
-	},
-	"devDependencies": {
-		"eslint": "^8.23.1",
-		"eslint-config-airbnb": "^19.0.4",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-jsx-a11y": "^6.6.1",
-		"eslint-plugin-prettier": "^4.2.1",
-		"prettier": "^2.7.1"
 	}
 }

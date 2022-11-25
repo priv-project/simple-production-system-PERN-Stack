@@ -7,13 +7,13 @@ const icons = { IconDashboard };
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
-    id: 'modules',
-    title: 'Modules',
+    id: 'maintenance',
+    title: 'Maintenance',
     type: 'group',
     children: [
         {
-            id: 'maintenance',
-            title: 'Maintenance',
+            id: 'common',
+            title: 'Common',
             type: 'collapse',
             icon: icons.IconKey,
 
@@ -22,28 +22,28 @@ const dashboard = {
                     id: 'model',
                     title: 'Model',
                     type: 'item',
-                    url: '/maintenance/model',
+                    url: '/maintenance/composite/model',
                     target: false
                 },
                 {
                     id: 'product',
                     title: 'Product',
                     type: 'item',
-                    url: '/maintenance/product',
+                    url: '/maintenance/composite/product',
                     target: false
                 },
                 {
                     id: 'assembly',
                     title: 'Assembly',
                     type: 'item',
-                    url: '/maintenance/assembly',
+                    url: '/maintenance/composite/assembly',
                     target: false
                 },
                 {
                     id: 'part',
                     title: 'Part',
                     type: 'item',
-                    url: '/maintenance/part',
+                    url: '/maintenance/composite/part',
                     target: false
                 }
             ]

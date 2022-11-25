@@ -16,15 +16,15 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-const ModelsPage = Loadable(lazy(() => import('views/modules/maintenance/models')));
-const ProductsPage = Loadable(lazy(() => import('views/modules/maintenance/products')));
-const AssemblyPage = Loadable(lazy(() => import('views/modules/maintenance/assembly')));
-const PartsPage = Loadable(lazy(() => import('views/modules/maintenance/parts')));
+const ModelsPage = Loadable(lazy(() => import('views/modules/maintenance/composite/models')));
+const ProductsPage = Loadable(lazy(() => import('views/modules/maintenance/composite/products')));
+const AssemblyPage = Loadable(lazy(() => import('views/modules/maintenance/composite/assembly')));
+const PartsPage = Loadable(lazy(() => import('views/modules/maintenance/composite/parts')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MaintenanceRoutes = {
-    path: '/maintenance',
+    path: '/maintenance/composite',
     element: <MainLayout />,
     children: [
         {

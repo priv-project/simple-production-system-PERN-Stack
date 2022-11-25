@@ -1,5 +1,5 @@
 import * as actionTypes from 'constants/actionTypes';
-import * as api from 'api/index.js';
+import * as api from 'api/auth';
 import Swal from 'sweetalert2';
 
 export const signin = (formData, navigate) => async (dispatch) => {
