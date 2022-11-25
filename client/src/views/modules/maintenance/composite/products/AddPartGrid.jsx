@@ -12,7 +12,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 // ACTIONS
-import { createProductPart } from 'actions/product_parts';
+import { createProductPart } from 'actions/maintenance/composite/product_parts';
 
 export default function DataGridDemo({ data, currentId, setAddPartGridVisible }) {
     const dispatch = useDispatch();

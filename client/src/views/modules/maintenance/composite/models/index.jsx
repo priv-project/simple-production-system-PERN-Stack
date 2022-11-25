@@ -10,7 +10,7 @@ import ModelGrid from './Grid';
 import ModelForm from './Form';
 import Toolbar from './Toolbar';
 
-import { getModels } from 'actions/models';
+import { getModels } from 'actions/maintenance/composite/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ModelsPage = () => {

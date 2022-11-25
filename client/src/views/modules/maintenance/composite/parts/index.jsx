@@ -12,8 +12,8 @@ import PartForm from './Form';
 import Toolbar from './Toolbar';
 
 // ACTIONS
-import { getParts } from 'actions/parts';
-import { getModels } from 'actions/models';
+import { getParts } from 'actions/maintenance/composite/parts';
+import { getModels } from 'actions/maintenance/composite/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const PartsPage = () => {

@@ -10,9 +10,9 @@ import AssemblyGrid from './Grid';
 import AssemblyForm from './Form';
 import Toolbar from './Toolbar';
 
-import { getAssembly } from 'actions/assembly';
-import { getModels } from 'actions/models';
-import { getParts } from 'actions/parts';
+import { getAssembly } from 'actions/maintenance/composite/assembly';
+import { getModels } from 'actions/maintenance/composite/models';
+import { getParts } from 'actions/maintenance/composite/parts';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const AssemblyPage = () => {

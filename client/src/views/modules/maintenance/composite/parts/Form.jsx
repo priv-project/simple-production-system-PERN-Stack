@@ -17,7 +17,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { createPart, updatePart, deletePart } from 'actions/parts';
+import { createPart, updatePart, deletePart } from 'actions/maintenance/composite/parts';
 
 const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
     const dispatch = useDispatch();

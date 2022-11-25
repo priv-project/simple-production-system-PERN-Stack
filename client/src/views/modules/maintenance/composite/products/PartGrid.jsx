@@ -13,7 +13,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddIcon from '@mui/icons-material/Add';
 
 // ACTIONS
-import { getProductParts } from 'actions/product_parts';
+import { getProductParts } from 'actions/maintenance/composite/product_parts';
 
 const PartGrid = ({ currentId, setAddPartGridVisible }) => {
     const dispatch = useDispatch();

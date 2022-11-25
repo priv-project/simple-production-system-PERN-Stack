@@ -11,7 +11,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteModel } from 'actions/models';
+import { deleteModel } from 'actions/maintenance/composite/models';
 
 const Grid = ({ models, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();

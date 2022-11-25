@@ -4,11 +4,11 @@ import { combineReducers } from 'redux';
 import customizationReducer from 'store/customizationReducer';
 import auth from 'reducers/auth';
 import error from 'reducers/error';
-import models from 'reducers/models';
-import products from 'reducers/products';
-import assembly from 'reducers/assembly';
-import parts from 'reducers/parts';
-import product_parts from 'reducers/product_parts';
+import models from 'reducers/maintenance/composite/models';
+import products from 'reducers/maintenance/composite/products';
+import assembly from 'reducers/maintenance/composite/assembly';
+import parts from 'reducers/maintenance/composite/parts';
+import product_parts from 'reducers/maintenance/composite/product_parts';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 

@@ -13,8 +13,8 @@ import ProductForm from './Form';
 import { Toolbar, PartGridToolbar } from './Toolbar';
 
 // ACTIONS
-import { getProducts } from 'actions/products';
-import { getParts } from 'actions/parts';
+import { getProducts } from 'actions/maintenance/composite/products';
+import { getParts } from 'actions/maintenance/composite/parts';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ProductsPage = () => {
