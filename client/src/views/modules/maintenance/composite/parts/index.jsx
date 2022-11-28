@@ -22,7 +22,7 @@ const PartsPage = () => {
     const models = useSelector((state) => state.models);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
-    console.log(parts);
+
     React.useEffect(() => {
         dispatch(getParts());
         dispatch(getModels());

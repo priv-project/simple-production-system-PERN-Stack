@@ -18,7 +18,7 @@ import DisplayError from 'constants/DisplayError';
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
-    const isError = useSelector((state) => state.error.isError);
+    // const isError = useSelector((state) => state.error.isError);
 
     return (
         <StyledEngineProvider injectFirst>
@@ -28,7 +28,7 @@ const App = () => {
                     <Routes />
                 </NavigationScroll>
             </ThemeProvider>
-            {isError ? <DisplayError /> : ''}
+            {/* {isError ? <DisplayError /> : ''} */}
         </StyledEngineProvider>
     );
 };
