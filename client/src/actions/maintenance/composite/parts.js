@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 export const getParts = () => async (dispatch) => {
     try {
         const { data } = await api.fetchParts();
-        console.log(data);
         dispatch(FETCH(data));
     } catch (error) {
         console.log(error);

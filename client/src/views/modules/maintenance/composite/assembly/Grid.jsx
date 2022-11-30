@@ -15,7 +15,7 @@ import { deleteAssembly } from 'actions/maintenance/composite/assembly';
 
 const Grid = ({ data, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
-    console.log(data);
+
     const columns = [
         { field: 'assembly_code', headerName: 'Assembly Code', width: 130 },
         { field: 'assembly_description', headerName: 'Description', width: 200 },

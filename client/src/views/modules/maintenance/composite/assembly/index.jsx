@@ -24,13 +24,13 @@ const AssemblyPage = () => {
 
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
-    console.log('assembly');
-    console.log(assembly);
+
     React.useEffect(() => {
         dispatch(getAssembly());
         dispatch(getModels());
         dispatch(getParts());
     }, [currentId, dispatch]);
+
     return (
         <MainCard title="ASSEMBLY">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />

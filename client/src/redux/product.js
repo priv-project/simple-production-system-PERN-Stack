@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
 
-export const partSlice = createSlice({
-    name: 'part',
+export const productSlice = createSlice({
+    name: 'product',
     initialState,
     reducers: {
         FETCH: (state, action) => {
@@ -17,15 +17,15 @@ export const partSlice = createSlice({
             return [...state, action.payload.result];
         },
         UPDATE: (state, action) => {
-            return state.map((part) => (part.part_id === action.payload.result.part_id ? action.payload.result : part));
+            return state.map((product) => (product.product_id === action.payload.result.product_id ? action.payload.result : product));
         },
         DELETE: (state, action) => {
-            return state.filter((part) => part.part_id !== action.payload);
+            return state.filter((product) => product.product_id !== action.payload);
         }
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { FETCH, CREATE, UPDATE, DELETE } = partSlice.actions;
+export const { FETCH, CREATE, UPDATE, DELETE } = productSlice.actions;
 
-export default partSlice.reducer;
+export default productSlice.reducer;

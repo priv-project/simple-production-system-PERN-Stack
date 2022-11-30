@@ -1,11 +1,16 @@
 import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
+import {
+    FETCH,
+    CREATE
+    // , UPDATE, DELETE
+} from 'redux/product_part';
 import Swal from 'sweetalert2';
 
 export const getProductParts = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchProductParts(id);
-        dispatch({ type: actionTypes.FETCH_PRODUCT_PARTS, payload: data });
+        dispatch(FETCH(data));
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
@@ -15,7 +20,8 @@ export const getProductParts = (id) => async (dispatch) => {
 export const getProductBom = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchProductParts(id);
-        dispatch({ type: actionTypes.FETCH_PRODUCT_BOM, payload: data });
+        // dispatch({ type: actionTypes.FETCH_PRODUCT_BOM, payload: data });
+        return;
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
@@ -25,7 +31,7 @@ export const getProductBom = (id) => async (dispatch) => {
 export const createProductPart = (id, formData, setAddPartGridVisible) => async (dispatch) => {
     try {
         const { data } = await api.createProductPart(id, formData);
-        dispatch({ type: actionTypes.CREATE_PRODUCT_PART, payload: data });
+        dispatch(CREATE(data));
         setAddPartGridVisible(false);
         Swal.fire('Success!', 'Product part has been added.', 'success');
     } catch (error) {
