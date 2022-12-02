@@ -1,6 +1,6 @@
 import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
-import { FETCH, CREATE, UPDATE, DELETE } from 'redux/assembly';
+import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/assembly';
 import Swal from 'sweetalert2';
 
 export const getAssembly = () => async (dispatch) => {

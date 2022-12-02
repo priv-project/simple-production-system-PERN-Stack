@@ -4,7 +4,7 @@ import {
     FETCH,
     CREATE
     // , UPDATE, DELETE
-} from 'redux/product_part';
+} from 'redux/maintenance/composite/product_part';
 import Swal from 'sweetalert2';
 
 export const getProductParts = (id) => async (dispatch) => {

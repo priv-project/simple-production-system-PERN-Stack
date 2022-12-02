@@ -1,6 +1,6 @@
 import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
-import { FETCH, CREATE, UPDATE, DELETE } from 'redux/product';
+import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/product';
 import Swal from 'sweetalert2';
 
 export const getProducts = () => async (dispatch) => {
