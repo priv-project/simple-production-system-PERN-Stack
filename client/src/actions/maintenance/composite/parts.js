@@ -1,5 +1,6 @@
 import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
+import { ERROR, UPDATE_ERROR } from 'redux/error';
 import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/part';
 import Swal from 'sweetalert2';
 
@@ -49,16 +50,10 @@ export const deletePart = (id) => async (dispatch) => {
         // dispatch({ type: actionTypes.DELETE_PART, payload: id });
         Swal.fire('Success!', 'Part deleted successfully', 'success');
     } catch (error) {
-        dispatch({
-            type: actionTypes.ERROR,
-            payload: {
-                isError: true,
-                data: error
-            }
-        });
+        dispatch(ERROR({ isError: true, data: error }));
 
         setTimeout(() => {
-            dispatch({ type: actionTypes.UPDATE_ERROR });
-        }, 3000);
+            dispatch(UPDATE_ERROR());
+        }, 5000);
     }
 };

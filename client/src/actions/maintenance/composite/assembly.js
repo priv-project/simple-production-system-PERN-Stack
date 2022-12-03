@@ -1,5 +1,6 @@
 import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
+import { ERROR, UPDATE_ERROR } from 'redux/error';
 import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/assembly';
 import Swal from 'sweetalert2';
 
@@ -43,16 +44,9 @@ export const deleteAssembly = (id) => async (dispatch) => {
         dispatch(DELETE(id));
         Swal.fire('Success!', 'Assy deleted successfully', 'success');
     } catch (error) {
-        dispatch({
-            type: actionTypes.ERROR,
-            payload: {
-                isError: true,
-                data: error
-            }
-        });
-
+        dispatch(ERROR({ isError: true, data: error }));
         setTimeout(() => {
-            dispatch({ type: actionTypes.UPDATE_ERROR });
-        }, 3000);
+            dispatch(UPDATE_ERROR());
+        }, 5000);
     }
 };
