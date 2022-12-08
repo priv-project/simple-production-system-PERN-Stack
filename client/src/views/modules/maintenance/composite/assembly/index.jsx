@@ -10,9 +10,9 @@ import AssemblyGrid from './Grid';
 import AssemblyForm from './Form';
 import Toolbar from './Toolbar';
 
-import { getAssembly } from 'actions/maintenance/composite/assembly';
-import { getModels } from 'actions/maintenance/composite/models';
-import { getParts } from 'actions/maintenance/composite/parts';
+import { getAssembly } from 'redux/maintenance/composite/actions/assembly';
+import { getModels } from 'redux/maintenance/composite/actions/models';
+import { getParts } from 'redux/maintenance/composite/actions/parts';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const AssemblyPage = () => {

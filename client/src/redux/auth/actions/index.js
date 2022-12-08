@@ -1,4 +1,3 @@
-import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/auth';
 import { AUTH, LOGOUT } from 'redux/auth';
 import Swal from 'sweetalert2';

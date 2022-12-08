@@ -9,16 +9,28 @@ import productReducer from 'redux/maintenance/composite/product';
 import productPartsReducer from 'redux/maintenance/composite/product_part';
 import authReducer from 'redux/auth';
 
+import supplierReducer from 'redux/maintenance/purchasing/supplier';
+
+/* Maintenance/Common Reducer */
+import currencyReducer from 'redux/maintenance/common/currency';
+import countryReducer from 'redux/maintenance/common/country';
+
 export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         customization: customizationReducer,
         error: errorReducer,
         auth: authReducer,
+        /* COMPOSITE */
         models: modelReducer,
         parts: partReducer,
         assembly: assemblyReducer,
         products: productReducer,
-        product_parts: productPartsReducer
+        product_parts: productPartsReducer,
+        /* PURCHASING */
+        suppliers: supplierReducer,
+        /* COMMON */
+        countries: countryReducer,
+        currencies: currencyReducer
     }
 });

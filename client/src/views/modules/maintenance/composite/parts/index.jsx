@@ -12,8 +12,8 @@ import PartForm from './Form';
 import Toolbar from './Toolbar';
 
 // ACTIONS
-import { getParts } from 'actions/maintenance/composite/parts';
-import { getModels } from 'actions/maintenance/composite/models';
+import { getParts } from 'redux/maintenance/composite/actions/parts';
+import { getModels } from 'redux/maintenance/composite/actions/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const PartsPage = () => {

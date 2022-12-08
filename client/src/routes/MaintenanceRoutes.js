@@ -21,32 +21,28 @@ const ProductsPage = Loadable(lazy(() => import('views/modules/maintenance/compo
 const AssemblyPage = Loadable(lazy(() => import('views/modules/maintenance/composite/assembly')));
 const PartsPage = Loadable(lazy(() => import('views/modules/maintenance/composite/parts')));
 
+const SupplierPage = Loadable(lazy(() => import('views/modules/maintenance/purchasing/supplier')));
+
+/* COMMON */
+const CountryPage = Loadable(lazy(() => import('views/modules/maintenance/common/country')));
+const CurrencyPage = Loadable(lazy(() => import('views/modules/maintenance/common/currency')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MaintenanceRoutes = {
-    path: '/maintenance/composite',
+    path: '/maintenance',
     element: <MainLayout />,
     children: [
-        {
-            path: 'model',
-            element: <ModelsPage />
-        },
-        {
-            path: 'product',
-            element: <ProductsPage />
-        },
-        {
-            path: 'assembly',
-            element: <AssemblyPage />
-        },
-        {
-            path: 'part',
-            element: <PartsPage />
-        }
-        // {
-        //     path: 'sample-page',
-        //     element: <SamplePage />
-        // }
+        { path: 'composite/model', element: <ModelsPage /> },
+        { path: 'composite/product', element: <ProductsPage /> },
+        { path: 'composite/assembly', element: <AssemblyPage /> },
+        { path: 'composite/part', element: <PartsPage /> },
+
+        { path: 'purchasing/supplier', element: <SupplierPage /> },
+
+        /* COMMON */
+        { path: 'common/country', element: <CountryPage /> },
+        { path: 'common/currency', element: <CurrencyPage /> }
     ]
 };
 

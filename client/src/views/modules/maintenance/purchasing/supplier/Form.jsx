@@ -12,27 +12,31 @@ import useScriptRef from 'hooks/useScriptRef';
 import JTextField from 'components/JTextField';
 import JSelect from 'components/JSelect';
 
-// third party
+// third suppliery
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { createPart, updatePart, deletePart } from 'actions/parts';
+import { createSupplier, updateSupplier, deleteSupplier } from 'redux/maintenance/purchasing/actions/supplier';
 
-const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
+const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
-    const [partData, setPartData] = React.useState({
-        part_code: '',
-        part_name: '',
-        part_description: '',
-        part_model_id: '',
-        part_remark: '',
-        part_status: '',
-        part_created_date: '',
-        part_updated_at: ''
+    const [supplierData, setSupplierData] = React.useState({
+        supplier_id: '',
+        supplier_code: '',
+        supplier_desc: '',
+        supplier_street: '',
+        supplier_country_id: '',
+        supplier_contact: '',
+        supplier_emai: '',
+        supplier_tel_num: '',
+        supplier_fax_num: '',
+        supplier_status: '',
+        supplier_created_at: '',
+        supplier_updated_a: ''
     });
-    const part = useSelector((state) => (currentId ? state.parts.find((part) => part.part_id === currentId) : null));
+    const supplier = useSelector((state) => (currentId ? state.suppliers.find((supplier) => supplier.supplier_id === currentId) : null));
 
     const handleDelete = () => {
         Swal.fire({
@@ -45,7 +49,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deletePart(currentId));
+                dispatch(deleteSupplier(currentId));
                 setFormVisible(false);
                 setCurrentId(0);
             }
@@ -53,28 +57,37 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
     };
 
     React.useEffect(() => {
-        if (part) setPartData(part);
-    }, [part]);
+        if (supplier) setSupplierData(supplier);
+    }, [supplier]);
 
     return (
         <Formik
             enableReinitialize={true}
-            initialValues={partData}
+            initialValues={supplierData}
             validationSchema={Yup.object().shape({
-                part_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 50.').required('This field is required'),
-                part_name: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 50.').required('This field is required'),
-                part_description: Yup.string().max(200, 'Maximum value is 50'),
-                part_model_id: Yup.number().required('This field is required'),
-                part_remark: Yup.string().max(200, 'Maximum value is 200.')
+                supplier_code: Yup.string(4)
+                    .min(4, 'Minimum value is 4.')
+                    .max(50, 'Maximum value is 50.')
+                    .required('This field is required'),
+                supplier_desc: Yup.string(4)
+                    .min(4, 'Minimum value is 4.')
+                    .max(50, 'Maximum value is 50.')
+                    .required('This field is required'),
+                supplier_street: Yup.string().max(200, 'Maximum value is 50'),
+                supplier_country_id: Yup.number().required('This field is required'),
+                supplier_contact: Yup.string().required('This field is required'),
+                supplier_email: Yup.string().email().required('This field is required'),
+                supplier_tel_num: Yup.number(),
+                supplier_fax_num: Yup.number()
             })}
             onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                 try {
                     if (scriptedRef.current) {
                         if (currentId === 0) {
                             // , name: user?.result?.name
-                            dispatch(createPart({ ...values }, setFormVisible));
+                            dispatch(createSupplier({ ...values }, setFormVisible));
                         } else {
-                            dispatch(updatePart(currentId, { ...values }, setFormVisible));
+                            dispatch(updateSupplier(currentId, { ...values }, setFormVisible));
                         }
                         setStatus({ success: true });
                         setSubmitting(false);
@@ -94,9 +107,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                     <Grid container spacing={1}>
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
-                                label="Part Code"
-                                name="part_code"
-                                value={values.part_code}
+                                label="Supplier Code"
+                                name="supplier_code"
+                                value={values.supplier_code}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -107,9 +120,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                     <Grid container spacing={1} sx={{ mt: 1 }}>
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
-                                label="Part Name"
-                                name="part_name"
-                                value={values.part_name}
+                                label="Supplier Name"
+                                name="supplier_name"
+                                value={values.supplier_name}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -121,8 +134,23 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                         <Grid item lg={4} md={4} sm={12}>
                             <JTextField
                                 label="Description"
-                                name="part_description"
-                                value={values.part_description}
+                                name="supplier_desc"
+                                value={values.supplier_desc}
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                touched={touched}
+                                type="multiline"
+                                rows={4}
+                                errors={errors}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={1} sx={{ mt: 1 }}>
+                        <Grid item lg={4} md={4} sm={12}>
+                            <JTextField
+                                label="Street"
+                                name="supplier_street"
+                                value={values.supplier_street}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
@@ -135,20 +163,20 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                     <Grid container spacing={1} sx={{ mt: 1 }}>
                         <Grid item lg={4} md={4} sm={12}>
                             <JSelect
-                                label="Model"
-                                labelId="part_model_id-label"
-                                id="part_model_id"
-                                name="part_model_id"
-                                value={values.part_model_id}
+                                label="Country"
+                                labelId="supplier_country_id-label"
+                                id="supplier_country_id"
+                                name="supplier_country_id"
+                                value={values.supplier_country_id}
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 touched={touched}
                                 errors={errors}
                             >
-                                {models.map((model, index) => {
+                                {country.map((model, index) => {
                                     return (
-                                        <MenuItem key={index} value={model.model_id}>
-                                            {model.model_code}
+                                        <MenuItem key={index} value={country.country_id}>
+                                            {country.country_code}
                                         </MenuItem>
                                     );
                                 })}
@@ -159,9 +187,9 @@ const Form = ({ currentId, setCurrentId, setFormVisible, models }) => {
                         <Grid container spacing={1} sx={{ mt: 1 }}>
                             <Grid item lg={4} md={4} sm={12}>
                                 <JSelect
-                                    labelId="part_status"
-                                    name="part_status"
-                                    value={values.part_status}
+                                    labelId="supplier_status"
+                                    name="supplier_status"
+                                    value={values.supplier_status}
                                     label="Status"
                                     onBlur={handleBlur}
                                     onChange={handleChange}

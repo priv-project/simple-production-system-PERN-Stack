@@ -7,40 +7,32 @@ import { Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 // import PartGrid from './Grid';
-import PartGrid from './Grid';
-import PartForm from './Form';
+import Grid from './Grid';
+import Form from './Form';
 import Toolbar from './Toolbar';
 
 // ACTIONS
-import { getParts } from 'actions/parts';
-import { getModels } from 'actions/models';
+import { getParts } from 'redux/maintenance/composite/actions/parts';
+import { getModels } from 'redux/maintenance/composite/actions/models';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const PartsPage = () => {
     const dispatch = useDispatch();
-    const parts = useSelector((state) => state.parts);
-    const models = useSelector((state) => state.models);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
-    console.log(parts);
-    React.useEffect(() => {
-        dispatch(getParts());
-        dispatch(getModels());
-    }, [currentId, dispatch]);
+
+    // React.useEffect(() => {
+    //     dispatch(getParts());
+    // }, [currentId, dispatch]);
 
     return (
-        <MainCard title="PARTS">
+        <MainCard title="SUPPLIER">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />
             {formVisible ? (
-                <PartForm
-                    currentId={currentId}
-                    setCurrentId={setCurrentId}
-                    formVisible={formVisible}
-                    setFormVisible={setFormVisible}
-                    models={models}
-                />
+                <Form currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
             ) : (
-                <PartGrid data={parts} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
+                <></>
+                // <PartGrid data={parts} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
         </MainCard>
     );

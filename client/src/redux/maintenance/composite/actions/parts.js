@@ -1,4 +1,3 @@
-import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
 import { ERROR, UPDATE_ERROR } from 'redux/error';
 import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/part';

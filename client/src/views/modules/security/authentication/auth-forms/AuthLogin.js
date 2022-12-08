@@ -27,7 +27,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { signin } from 'actions/auth';
+import { signin } from 'redux/auth/actions';
 
 // project imports
 import useScriptRef from 'hooks/useScriptRef';

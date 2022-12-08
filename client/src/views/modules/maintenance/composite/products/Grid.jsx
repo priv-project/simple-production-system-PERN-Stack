@@ -11,7 +11,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteProduct, getProducts } from 'actions/maintenance/composite/products';
+import { deleteProduct, getProducts } from 'redux/maintenance/composite/actions/products';
 
 const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();

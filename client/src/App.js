@@ -12,7 +12,7 @@ import themes from 'themes';
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
-import DisplayError from 'constants/DisplayError';
+import Error from 'components/Error';
 
 // ==============================|| APP ||============================== //
 
@@ -28,7 +28,7 @@ const App = () => {
                     <Routes />
                 </NavigationScroll>
             </ThemeProvider>
-            {isError ? <DisplayError /> : ''}
+            {isError ? <Error /> : ''}
         </StyledEngineProvider>
     );
 };

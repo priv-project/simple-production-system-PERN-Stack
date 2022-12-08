@@ -13,8 +13,8 @@ import ProductForm from './Form';
 import { Toolbar, PartGridToolbar } from './Toolbar';
 
 // ACTIONS
-import { getProducts } from 'actions/maintenance/composite/products';
-import { getParts } from 'actions/maintenance/composite/parts';
+import { getProducts } from 'redux/maintenance/composite/actions/products';
+import { getParts } from 'redux/maintenance/composite/actions/parts';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const ProductsPage = () => {

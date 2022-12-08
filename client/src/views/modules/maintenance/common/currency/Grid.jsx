@@ -3,45 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
 
 // MATERIAL ICONS
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import AddIcon from '@mui/icons-material/Add';
 
 // ACTIONS
-import { getProductParts } from 'redux/maintenance/composite/actions/product_parts';
+import { getCurrencys, deleteCurrency } from 'redux/maintenance/common/actions/currency';
 
-const PartGrid = ({ currentId, setAddPartGridVisible }) => {
+const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.product_parts).filter((e) => {
-        return e.product_id === currentId;
-    });
-
-    const CustomToolbar = () => {
-        return (
-            <GridToolbarContainer>
-                <Button size="small" startIcon={<AddIcon />} sx={{ fontWeight: '600' }} onClick={() => setAddPartGridVisible(true)}>
-                    Add Product BOM
-                </Button>
-            </GridToolbarContainer>
-        );
-    };
+    const currencies = useSelector((state) => state.currencies);
 
     React.useEffect(() => {
-        dispatch(getProductParts(currentId));
-    }, [dispatch, currentId]);
+        dispatch(getCurrencys());
+    }, [currentId, dispatch]);
 
     const columns = [
-        { field: 'part_code', headerName: 'Part Code', minWidth: 130, flex: 1 },
-        { field: 'part_description', headerName: 'Description', minWidth: 200, flex: 1 },
-        { field: 'model_code', headerName: 'Model', minWidth: 135, flex: 1 },
+        { field: 'currency_code', headerName: 'Code', minWidth: 130 },
+        { field: 'currency_desc', headerName: 'Description', minWidth: 200 },
+        { field: 'currency_symbol', headerName: 'Symbol', minWidth: 120 },
         {
             field: 'actions',
             headerName: 'Actions',
+            flex: 1,
             renderCell: (params) => {
                 return (
                     <Box>
@@ -83,30 +70,30 @@ const PartGrid = ({ currentId, setAddPartGridVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // dispatch(deleteProduct(row.part_id));
-                // setCurrentId(0);
+                dispatch(deleteCurrency(row.currency_id));
+                setCurrentId(0);
             }
         });
     };
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        // setCurrentId(row.part_id);
+        setCurrentId(row.currency_id);
         setFormVisible(true);
     };
 
     return (
-        <div style={{ height: 300, width: '100%' }}>
+        <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={data}
+                rows={currencies}
                 columns={columns}
-                getRowId={(row) => row.part_id}
+                getRowId={(row) => row.currency_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                components={{ Toolbar: CustomToolbar }}
+                // components={{ Toolbar: CustomToolbar }}
             />
         </div>
     );
 };
 
-export default PartGrid;
+export default Grid;

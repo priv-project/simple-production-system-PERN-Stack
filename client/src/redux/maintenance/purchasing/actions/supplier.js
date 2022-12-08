@@ -1,12 +1,11 @@
-import * as actionTypes from 'constants/actionTypes';
 import * as api from 'api/maintenance';
 import { ERROR, UPDATE_ERROR } from 'redux/error';
-import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/composite/assembly';
+import { FETCH, CREATE, UPDATE, DELETE } from 'redux/maintenance/purchasing/supplier';
 import Swal from 'sweetalert2';
 
-export const getAssembly = () => async (dispatch) => {
+export const getSuppliers = () => async (dispatch) => {
     try {
-        const { data } = await api.fetchAssembly();
+        const { data } = await api.fetchSuppliers();
         dispatch(FETCH(data));
     } catch (error) {
         console.log(error);
@@ -14,35 +13,35 @@ export const getAssembly = () => async (dispatch) => {
     }
 };
 
-export const createAssembly = (assy, setFormVisible) => async (dispatch) => {
+export const createSupplier = (part, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.createAssembly(assy);
+        const { data } = await api.createSupplier(part);
         dispatch(CREATE(data));
         setFormVisible(false);
-        Swal.fire('Success!', 'Assy has been added successfully', 'success');
+        Swal.fire('Success!', 'Supplier has been added successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const updateAssembly = (id, assy, setFormVisible) => async (dispatch) => {
+export const updateSupplier = (id, part, setFormVisible) => async (dispatch) => {
     try {
-        const { data } = await api.updateAssembly(id, assy);
+        const { data } = await api.updateSupplier(id, part);
         dispatch(UPDATE(data));
         setFormVisible(false);
-        Swal.fire('Success!', 'Assy updated successfully', 'success');
+        Swal.fire('Success!', 'Supplier updated successfully', 'success');
     } catch (error) {
         console.log(error);
         Swal.fire('Error!', 'Something went wrong', 'error');
     }
 };
 
-export const deleteAssembly = (id) => async (dispatch) => {
+export const deleteSupplier = (id) => async (dispatch) => {
     try {
-        await api.deleteAssembly(id);
+        await api.deleteSupplier(id);
         dispatch(DELETE(id));
-        Swal.fire('Success!', 'Assy deleted successfully', 'success');
+        Swal.fire('Success!', 'Supplier deleted successfully', 'success');
     } catch (error) {
         dispatch(ERROR({ isError: true, data: error }));
         setTimeout(() => {

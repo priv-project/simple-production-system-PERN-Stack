@@ -6,33 +6,30 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import ModelGrid from './Grid';
-import ModelForm from './Form';
+// import PartGrid from './Grid';
+import Grid from './Grid';
+import Form from './Form';
 import Toolbar from './Toolbar';
 
-import { getModels } from 'redux/maintenance/composite/actions/models';
+// ACTIONS
+
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const ModelsPage = () => {
+const PartsPage = () => {
     const dispatch = useDispatch();
-    const models = useSelector((state) => state.models);
     const [formVisible, setFormVisible] = React.useState(false);
     const [currentId, setCurrentId] = React.useState(0);
 
-    React.useEffect(() => {
-        dispatch(getModels());
-    }, [currentId, dispatch]);
-
     return (
-        <MainCard title="MODELS LIST">
+        <MainCard title="CURRENCY">
             <Toolbar formVisible={formVisible} setFormVisible={setFormVisible} setCurrentId={setCurrentId} />
             {formVisible ? (
-                <ModelForm currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
+                <Form currentId={currentId} setCurrentId={setCurrentId} formVisible={formVisible} setFormVisible={setFormVisible} />
             ) : (
-                <ModelGrid models={models} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
+                <Grid currentId={currentId} setCurrentId={setCurrentId} setFormVisible={setFormVisible} />
             )}
         </MainCard>
     );
 };
 
-export default ModelsPage;
+export default PartsPage;

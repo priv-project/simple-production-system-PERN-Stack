@@ -20,9 +20,9 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // ACTIONS
-import { createProduct, updateProduct, deleteProduct } from 'actions/maintenance/composite/products';
-import { getModels } from 'actions/maintenance/composite/models';
-import { getParts } from 'actions/maintenance/composite/parts';
+import { createProduct, updateProduct, deleteProduct } from 'redux/maintenance/composite/actions/products';
+import { getModels } from 'redux/maintenance/composite/actions/models';
+import { getParts } from 'redux/maintenance/composite/actions/parts';
 
 const Form = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
