@@ -33,7 +33,7 @@ export const createSupplier = async (req, res) => {
       `INSERT INTO supplier (
 									supplier_code,
 									supplier_desc,
-									supplier_stree,
+									supplier_street,
 									supplier_country_id,
 									supplier_contact,
 									supplier_email,

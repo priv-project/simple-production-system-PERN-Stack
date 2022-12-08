@@ -11,19 +11,24 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deletePart } from 'redux/maintenance/composite/actions/parts';
+import { getSuppliers, deleteSupplier } from 'redux/maintenance/purchasing/actions/supplier';
 
-const Grid = ({ data, setCurrentId, setFormVisible }) => {
+const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
+    const suppliers = useSelector((state) => state.suppliers);
+
+    React.useEffect(() => {
+        dispatch(getSuppliers());
+    }, [currentId, dispatch]);
 
     const columns = [
-        { field: 'part_code', headerName: 'Code', width: 130 },
-        { field: 'part_name', headerName: 'Name', width: 130 },
-        { field: 'part_description', headerName: 'Description', width: 200 },
-        { field: 'model_code', headerName: 'Model Code', width: 135 },
+        { field: 'supplier_code', headerName: 'Code', minWidth: 130 },
+        { field: 'supplier_desc', headerName: 'Description', minWidth: 250 },
+        { field: 'supplier_email', headerName: 'Email', minWidth: 250 },
         {
             field: 'actions',
             headerName: 'Actions',
+            flex: 1,
             renderCell: (params) => {
                 return (
                     <Box>
@@ -65,7 +70,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deletePart(row.part_id));
+                dispatch(deleteSupplier(row.supplier_id));
                 setCurrentId(0);
             }
         });
@@ -73,16 +78,16 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.part_id);
+        setCurrentId(row.supplier_id);
         setFormVisible(true);
     };
 
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={data}
+                rows={suppliers}
                 columns={columns}
-                getRowId={(row) => row.part_id}
+                getRowId={(row) => row.supplier_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 // components={{ Toolbar: CustomToolbar }}
