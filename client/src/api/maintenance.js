@@ -48,6 +48,11 @@ export const createSupplier = (newSupplier) => API.post('/maintenance/purchasing
 export const updateSupplier = (id, updateSupplier) => API.patch(`/maintenance/purchasing/supplier/${id}`, updateSupplier);
 export const deleteSupplier = (id) => API.delete(`/maintenance/purchasing/supplier/${id}`);
 
+export const fetchPackings = () => API.get('/maintenance/purchasing/packing');
+export const createPacking = (newPacking) => API.post('/maintenance/purchasing/packing', newPacking);
+export const updatePacking = (id, updatePacking) => API.patch(`/maintenance/purchasing/packing/${id}`, updatePacking);
+export const deletePacking = (id) => API.delete(`/maintenance/purchasing/packing/${id}`);
+
 /* COMMON */
 export const fetchCountrys = () => API.get('/maintenance/common/country');
 export const createCountry = (newCountry) => API.post('/maintenance/common/country', newCountry);
@@ -58,3 +63,8 @@ export const fetchCurrencys = () => API.get('/maintenance/common/currency');
 export const createCurrency = (newCurrency) => API.post('/maintenance/common/currency', newCurrency);
 export const updateCurrency = (id, updateCurrency) => API.patch(`/maintenance/common/currency/${id}`, updateCurrency);
 export const deleteCurrency = (id) => API.delete(`/maintenance/common/currency/${id}`);
+
+export const fetchAreas = () => API.get('/maintenance/common/area');
+export const createArea = (newArea) => API.post('/maintenance/common/area', newArea);
+export const updateArea = (id, updateArea) => API.patch(`/maintenance/common/area/${id}`, updateArea);
+export const deleteArea = (id) => API.delete(`/maintenance/common/area/${id}`);

@@ -22,10 +22,12 @@ const AssemblyPage = Loadable(lazy(() => import('views/modules/maintenance/compo
 const PartsPage = Loadable(lazy(() => import('views/modules/maintenance/composite/parts')));
 
 const SupplierPage = Loadable(lazy(() => import('views/modules/maintenance/purchasing/supplier')));
+const PackingPage = Loadable(lazy(() => import('views/modules/maintenance/purchasing/packing')));
 
 /* COMMON */
 const CountryPage = Loadable(lazy(() => import('views/modules/maintenance/common/country')));
 const CurrencyPage = Loadable(lazy(() => import('views/modules/maintenance/common/currency')));
+const AreaPage = Loadable(lazy(() => import('views/modules/maintenance/common/area')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -39,10 +41,12 @@ const MaintenanceRoutes = {
         { path: 'composite/part', element: <PartsPage /> },
 
         { path: 'purchasing/supplier', element: <SupplierPage /> },
+        { path: 'purchasing/packing', element: <PackingPage /> },
 
         /* COMMON */
         { path: 'common/country', element: <CountryPage /> },
-        { path: 'common/currency', element: <CurrencyPage /> }
+        { path: 'common/currency', element: <CurrencyPage /> },
+        { path: 'common/area', element: <AreaPage /> }
     ]
 };
 

@@ -25,7 +25,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
         supplier_street: '',
         supplier_country_id: '',
         supplier_contact: '',
-        supplier_emai: '',
+        supplier_email: '',
         supplier_tel_num: '',
         supplier_fax_num: '',
         supplier_status: '',

@@ -8,10 +8,9 @@ import JTextField from 'components/JTextField';
 import JSelect from 'components/JSelect';
 
 // third suppliery
-import * as Yup from 'yup';
 import { Formik } from 'formik';
 
-const AppForm = ({ initialValues = {}, validationSchema, currentId, setCurrentId, setFormVisible, actions, items }) => {
+const AppForm = ({ initialValues = {}, validationSchema, currentId, setCurrentId, setFormVisible, actions, buttonsTemplate, items }) => {
     const dispatch = useDispatch();
     const scriptedRef = useScriptRef();
 
@@ -140,20 +139,25 @@ const AppForm = ({ initialValues = {}, validationSchema, currentId, setCurrentId
                     })}
                     <Box sx={{ mt: 2 }}>
                         <ButtonGroup variant="contained" aria-label="outlined button group">
-                            <Button size="small" disabled={isSubmitting} type="submit">
-                                Save
-                            </Button>
+                            {actions?.CREATE || actions?.UPDATE ? (
+                                <Button size="small" disabled={isSubmitting} type="submit">
+                                    Save
+                                </Button>
+                            ) : (
+                                ''
+                            )}
                             <Button size="small" onClick={resetForm}>
                                 Cancel
                             </Button>
-                            {currentId ? (
-                                <Button size="small" color="error.main" onClick={handleDelete}>
+                            {actions?.DESTROY && currentId !== 0 ? (
+                                <Button size="small" onClick={handleDelete} color="error">
                                     Delete
                                 </Button>
                             ) : (
                                 ''
                             )}
                         </ButtonGroup>
+                        {buttonsTemplate ?? buttonsTemplate}
                     </Box>
                 </form>
             )}

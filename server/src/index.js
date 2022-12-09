@@ -10,9 +10,11 @@ import partRoutes from "#module/maintenance/composite/part/routes/index.js";
 import assemblyRoutes from "#module/maintenance/composite/assembly/routes/index.js";
 
 import supplierRoutes from "#module/maintenance/purchasing/supplier/routes/index.js";
+import packingRoutes from "#module/maintenance/purchasing/packing/routes/index.js";
 
 import countryRoutes from "#module/maintenance/common/country/routes/index.js";
 import currencyRoutes from "#module/maintenance/common/currency/routes/index.js";
+import areaRoutes from "#module/maintenance/common/area/routes/index.js";
 
 dotenv.config();
 const app = express();
@@ -29,10 +31,12 @@ app.use("/api/maintenance/composite/assembly", assemblyRoutes);
 
 /* PURCHASING ROUTES */
 app.use("/api/maintenance/purchasing/supplier", supplierRoutes);
+app.use("/api/maintenance/purchasing/packing", packingRoutes);
 
 /* COMMON ROUTES */
 app.use("/api/maintenance/common/country", countryRoutes);
 app.use("/api/maintenance/common/currency", currencyRoutes);
+app.use("/api/maintenance/common/area", areaRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

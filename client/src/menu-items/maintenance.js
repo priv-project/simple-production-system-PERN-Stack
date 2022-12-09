@@ -30,7 +30,10 @@ const maintenance = {
             type: 'collapse',
             icon: icons.IconKey,
 
-            children: [{ id: 'supplier', title: 'Supplier', type: 'item', url: '/maintenance/purchasing/supplier', target: false }]
+            children: [
+                { id: 'supplier', title: 'Supplier', type: 'item', url: '/maintenance/purchasing/supplier', target: false },
+                { id: 'packing', title: 'Packing', type: 'item', url: '/maintenance/purchasing/packing', target: false }
+            ]
         },
         {
             id: 'common',
@@ -40,7 +43,8 @@ const maintenance = {
 
             children: [
                 { id: 'country', title: 'Country', type: 'item', url: '/maintenance/common/country', target: false },
-                { id: 'currency', title: 'Currency', type: 'item', url: '/maintenance/common/currency', target: false }
+                { id: 'currency', title: 'Currency', type: 'item', url: '/maintenance/common/currency', target: false },
+                { id: 'area', title: 'Area', type: 'item', url: '/maintenance/common/area', target: false }
             ]
         }
     ]

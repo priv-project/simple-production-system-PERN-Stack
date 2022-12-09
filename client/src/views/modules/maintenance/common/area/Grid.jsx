@@ -12,20 +12,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import SearchIcon from '@mui/icons-material/Search';
 
 // ACTIONS
-import { getSuppliers, deleteSupplier } from 'redux/maintenance/purchasing/actions/supplier';
+import { getAreas, deleteArea } from 'redux/maintenance/common/actions/area';
 
 const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
-    const suppliers = useSelector((state) => state.suppliers);
+    const areas = useSelector((state) => state.areas);
 
     React.useEffect(() => {
-        dispatch(getSuppliers());
+        dispatch(getAreas());
     }, [currentId, dispatch]);
 
     const columns = [
-        { field: 'supplier_code', headerName: 'Code', minWidth: 130 },
-        { field: 'supplier_desc', headerName: 'Description', minWidth: 250 },
-        { field: 'supplier_email', headerName: 'Email', minWidth: 250 },
+        { field: 'area_code', headerName: 'Code', minWidth: 130 },
+        { field: 'area_desc', headerName: 'Description', minWidth: 250 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -71,25 +70,25 @@ const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+                dispatch(deleteArea(row.area_id));
                 setCurrentId(0);
-                dispatch(deleteSupplier(row.supplier_id));
             }
         });
     };
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        console.log(row.supplier_id);
-        setCurrentId(row.supplier_id);
+        console.log(row.area_id);
+        setCurrentId(row.area_id);
         setFormVisible(true);
     };
 
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={suppliers}
+                rows={areas}
                 columns={columns}
-                getRowId={(row) => row.supplier_id}
+                getRowId={(row) => row.area_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 components={{ Toolbar: GridToolbar }}

@@ -6,7 +6,7 @@ const router = express.Router();
 export const getPackings = async (req, res) => {
   try {
     let result = await pool.query(
-      `SELECT * FROM vw_packing ORDER BY packing_code`
+      `SELECT * FROM packing ORDER BY packing_code`
     );
     result = result.rows;
     res.status(201).json({ result });

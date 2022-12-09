@@ -9,11 +9,14 @@ import productReducer from 'redux/maintenance/composite/product';
 import productPartsReducer from 'redux/maintenance/composite/product_part';
 import authReducer from 'redux/auth';
 
+/* Maintenance/Purchasing Reducers */
 import supplierReducer from 'redux/maintenance/purchasing/supplier';
+import packingReducer from 'redux/maintenance/purchasing/packing';
 
-/* Maintenance/Common Reducer */
+/* Maintenance/Common Reducers */
 import currencyReducer from 'redux/maintenance/common/currency';
 import countryReducer from 'redux/maintenance/common/country';
+import areaReducer from 'redux/maintenance/common/area';
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
@@ -29,8 +32,10 @@ export const store = configureStore({
         product_parts: productPartsReducer,
         /* PURCHASING */
         suppliers: supplierReducer,
+        packings: packingReducer,
         /* COMMON */
         countries: countryReducer,
-        currencies: currencyReducer
+        currencies: currencyReducer,
+        areas: areaReducer
     }
 });

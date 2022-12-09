@@ -34,8 +34,8 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
         <AppForm
             initialValues={areaData}
             validationSchema={Yup.object().shape({
-                area_code: Yup.string(4).min(4, 'Minimum value is 4.').max(50, 'Maximum value is 50.').required('This field is required'),
-                area_desc: Yup.string(4).min(4, 'Minimum value is 4.').max(300, 'Maximum value is 300.')
+                area_code: Yup.string().min(2, 'Minimum value is 2.').max(50, 'Maximum value is 50.').required('This field is required'),
+                area_desc: Yup.string().min(4, 'Minimum value is 4.').max(300, 'Maximum value is 300.')
             })}
             currentId={currentId}
             setCurrentId={setCurrentId}

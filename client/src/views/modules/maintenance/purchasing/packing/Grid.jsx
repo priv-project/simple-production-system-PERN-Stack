@@ -3,27 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/system';
+import { Box } from '@mui/material';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 // MATERIAL ICONS
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import SearchIcon from '@mui/icons-material/Search';
 
 // ACTIONS
-import { deletePart } from 'actions/parts';
+import { getPackings, deletePacking } from 'redux/maintenance/purchasing/actions/packing';
 
-const Grid = ({ data, setCurrentId, setFormVisible }) => {
+const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
+    const packings = useSelector((state) => state.packings);
+
+    React.useEffect(() => {
+        dispatch(getPackings());
+    }, [currentId, dispatch]);
 
     const columns = [
-        { field: 'part_code', headerName: 'Code', width: 130 },
-        { field: 'part_name', headerName: 'Name', width: 130 },
-        { field: 'part_description', headerName: 'Description', width: 200 },
-        { field: 'model_code', headerName: 'Model Code', width: 135 },
+        { field: 'packing_code', headerName: 'Code', minWidth: 130 },
+        { field: 'packing_desc', headerName: 'Description', minWidth: 250 },
         {
             field: 'actions',
             headerName: 'Actions',
+            flex: 1,
             renderCell: (params) => {
                 return (
                     <Box>
@@ -65,27 +70,34 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deletePart(row.part_id));
                 setCurrentId(0);
+                dispatch(deletePacking(row.packing_id));
             }
         });
     };
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.part_id);
+        console.log(row.packing_id);
+        setCurrentId(row.packing_id);
         setFormVisible(true);
     };
 
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={data}
+                rows={packings}
                 columns={columns}
-                getRowId={(row) => row.part_id}
+                getRowId={(row) => row.packing_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                // components={{ Toolbar: CustomToolbar }}
+                components={{ Toolbar: GridToolbar }}
+                componentsProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 }
+                    }
+                }}
             />
         </div>
     );
