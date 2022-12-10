@@ -29,6 +29,9 @@ const CountryPage = Loadable(lazy(() => import('views/modules/maintenance/common
 const CurrencyPage = Loadable(lazy(() => import('views/modules/maintenance/common/currency')));
 const AreaPage = Loadable(lazy(() => import('views/modules/maintenance/common/area')));
 
+/* COMMON */
+const CustomerPage = Loadable(lazy(() => import('views/modules/maintenance/sales/customer')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MaintenanceRoutes = {
@@ -46,7 +49,10 @@ const MaintenanceRoutes = {
         /* COMMON */
         { path: 'common/country', element: <CountryPage /> },
         { path: 'common/currency', element: <CurrencyPage /> },
-        { path: 'common/area', element: <AreaPage /> }
+        { path: 'common/area', element: <AreaPage /> },
+
+        /* SALES */
+        { path: 'sales/customer', element: <CustomerPage /> }
     ]
 };
 

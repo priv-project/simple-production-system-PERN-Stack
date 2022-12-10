@@ -18,6 +18,9 @@ import currencyReducer from 'redux/maintenance/common/currency';
 import countryReducer from 'redux/maintenance/common/country';
 import areaReducer from 'redux/maintenance/common/area';
 
+/* Maintenance/Sales Reducers */
+import customerReducer from 'redux/maintenance/sales/customer';
+
 export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
@@ -36,6 +39,8 @@ export const store = configureStore({
         /* COMMON */
         countries: countryReducer,
         currencies: currencyReducer,
-        areas: areaReducer
+        areas: areaReducer,
+        /* SALES */
+        customers: customerReducer
     }
 });

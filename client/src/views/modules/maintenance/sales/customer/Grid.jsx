@@ -3,27 +3,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
+import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Box } from '@mui/system';
 
 // MATERIAL ICONS
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import SearchIcon from '@mui/icons-material/Search';
 
 // ACTIONS
-import { deleteAssembly } from 'redux/maintenance/composite/actions/assembly';
+import { getCustomers, deleteCustomer } from 'redux/maintenance/sales/actions/customer';
 
-const Grid = ({ data, setCurrentId, setFormVisible }) => {
+const Grid = ({ currentId, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
+    const customers = useSelector((state) => state.customers);
+
+    React.useEffect(() => {
+        dispatch(getCustomers());
+    }, [currentId, dispatch]);
 
     const columns = [
-        { field: 'assembly_code', headerName: 'Assembly Code', width: 130 },
-        { field: 'assembly_description', headerName: 'Description', width: 200 },
-        { field: 'model_code', headerName: 'Model Code', width: 135 },
-        { field: 'part_code', headerName: 'Equivalent Part', width: 135 },
+        { field: 'customer_code', headerName: 'Code', minWidth: 130 },
+        { field: 'customer_desc', headerName: 'Description', minWidth: 250 },
+        { field: 'customer_email', headerName: 'Email', minWidth: 150 },
+        { field: 'customer_contact', headerName: 'Contact', minWidth: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
+            flex: 1,
+            minWidth: 100,
             renderCell: (params) => {
                 return (
                     <Box>
@@ -65,7 +73,7 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(deleteAssembly(row.assembly_id));
+                dispatch(deleteCustomer(row.customer_id));
                 setCurrentId(0);
             }
         });
@@ -73,16 +81,17 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
 
     const handleView = (e, row) => {
         e.stopPropagation();
-        setCurrentId(row.product_id);
+        console.log(row.customer_id);
+        setCurrentId(row.customer_id);
         setFormVisible(true);
     };
 
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={data}
+                rows={customers}
                 columns={columns}
-                getRowId={(row) => row.assembly_id}
+                getRowId={(row) => row.customer_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 components={{ Toolbar: GridToolbar }}

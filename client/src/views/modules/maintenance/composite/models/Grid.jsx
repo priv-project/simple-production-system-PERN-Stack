@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
 
 // MATERIAL ICONS
@@ -15,14 +15,6 @@ import { deleteModel } from 'redux/maintenance/composite/actions/models';
 
 const Grid = ({ models, setCurrentId, setFormVisible }) => {
     const dispatch = useDispatch();
-
-    const CustomToolbar = () => {
-        return (
-            <GridToolbarContainer>
-                <button>TEST BUTTON</button>
-            </GridToolbarContainer>
-        );
-    };
 
     const columns = [
         // { field: 'model_id', headerName: 'ID', width: 70, hideable: false },
@@ -92,7 +84,13 @@ const Grid = ({ models, setCurrentId, setFormVisible }) => {
                 getRowId={(row) => row.model_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                // components={{ Toolbar: CustomToolbar }}
+                components={{ Toolbar: GridToolbar }}
+                componentsProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 }
+                    }
+                }}
             />
         </div>
     );

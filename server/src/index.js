@@ -16,6 +16,9 @@ import countryRoutes from "#module/maintenance/common/country/routes/index.js";
 import currencyRoutes from "#module/maintenance/common/currency/routes/index.js";
 import areaRoutes from "#module/maintenance/common/area/routes/index.js";
 
+/* SALES */
+import salesRoutes from "#module/maintenance/sales/customer/routes/index.js";
+
 dotenv.config();
 const app = express();
 
@@ -37,6 +40,9 @@ app.use("/api/maintenance/purchasing/packing", packingRoutes);
 app.use("/api/maintenance/common/country", countryRoutes);
 app.use("/api/maintenance/common/currency", currencyRoutes);
 app.use("/api/maintenance/common/area", areaRoutes);
+
+/* SALES ROUTES */
+app.use("/api/maintenance/sales/customer", salesRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

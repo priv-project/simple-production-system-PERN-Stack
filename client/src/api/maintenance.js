@@ -68,3 +68,9 @@ export const fetchAreas = () => API.get('/maintenance/common/area');
 export const createArea = (newArea) => API.post('/maintenance/common/area', newArea);
 export const updateArea = (id, updateArea) => API.patch(`/maintenance/common/area/${id}`, updateArea);
 export const deleteArea = (id) => API.delete(`/maintenance/common/area/${id}`);
+
+/* SALES */
+export const fetchCustomers = () => API.get('/maintenance/sales/customer');
+export const createCustomer = (newCustomer) => API.post('/maintenance/sales/customer', newCustomer);
+export const updateCustomer = (id, updateCustomer) => API.patch(`/maintenance/sales/customer/${id}`, updateCustomer);
+export const deleteCustomer = (id) => API.delete(`/maintenance/sales/customer/${id}`);

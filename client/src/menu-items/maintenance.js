@@ -46,6 +46,14 @@ const maintenance = {
                 { id: 'currency', title: 'Currency', type: 'item', url: '/maintenance/common/currency', target: false },
                 { id: 'area', title: 'Area', type: 'item', url: '/maintenance/common/area', target: false }
             ]
+        },
+        {
+            id: 'sales',
+            title: 'Sales',
+            type: 'collapse',
+            icon: icons.IconKey,
+
+            children: [{ id: 'customer', title: 'Customer', type: 'item', url: '/maintenance/sales/customer', target: false }]
         }
     ]
 };

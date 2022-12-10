@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
 
 // MATERIAL ICONS
@@ -85,7 +85,13 @@ const Grid = ({ data, setCurrentId, setFormVisible }) => {
                 getRowId={(row) => row.part_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                // components={{ Toolbar: CustomToolbar }}
+                components={{ Toolbar: GridToolbar }}
+                componentsProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 }
+                    }
+                }}
             />
         </div>
     );
