@@ -31,6 +31,7 @@ const AreaPage = Loadable(lazy(() => import('views/modules/maintenance/common/ar
 
 /* COMMON */
 const CustomerPage = Loadable(lazy(() => import('views/modules/maintenance/sales/customer')));
+const ProductCustomerPage = Loadable(lazy(() => import('views/modules/maintenance/sales/product-customer')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -52,7 +53,8 @@ const MaintenanceRoutes = {
         { path: 'common/area', element: <AreaPage /> },
 
         /* SALES */
-        { path: 'sales/customer', element: <CustomerPage /> }
+        { path: 'sales/customer', element: <CustomerPage /> },
+        { path: 'sales/product-customer', element: <ProductCustomerPage /> }
     ]
 };
 

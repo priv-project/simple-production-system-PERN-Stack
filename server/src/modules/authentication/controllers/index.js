@@ -12,7 +12,7 @@ export const signin = async (req, res) => {
 
   try {
     const oldUser = await pool.query(
-      "SELECT * FROM public.user WHERE user_name = $1",
+      "SELECT * FROM public.user WHERE user_username = $1",
       [user_username]
     );
 

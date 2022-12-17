@@ -53,7 +53,16 @@ const maintenance = {
             type: 'collapse',
             icon: icons.IconKey,
 
-            children: [{ id: 'customer', title: 'Customer', type: 'item', url: '/maintenance/sales/customer', target: false }]
+            children: [
+                { id: 'customer', title: 'Customer', type: 'item', url: '/maintenance/sales/customer', target: false },
+                {
+                    id: 'product-customer',
+                    title: 'Product Customer',
+                    type: 'item',
+                    url: '/maintenance/sales/product-customer',
+                    target: false
+                }
+            ]
         }
     ]
 };

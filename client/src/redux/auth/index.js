@@ -11,7 +11,7 @@ export const authSlice = createSlice({
             // doesn't actually mutate the state because it uses the Immer library,
             // which detects changes to a "draft state" and produces a brand new
             // immutable state based off those changes
-            localStorage.setItem('profile', JSON.stringify({ ...action?.data }));
+            localStorage.setItem('profile', JSON.stringify({ ...action?.payload }));
             return { ...state, authData: action.data, loading: false, errors: null };
         },
         LOGOUT: (state) => {
