@@ -8,8 +8,6 @@ import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
 
 // MATERIAL ICONS
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
 import { deleteProduct, getProducts } from 'redux/maintenance/composite/actions/products';
@@ -21,44 +19,15 @@ const AppGrid = () => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.products);
     const [detailVisible, setDetailVisible] = React.useState(false);
+    const [subGridVisible, setSubGridVisible] = React.useState(false);
 
     React.useEffect(() => {
         dispatch(getProducts());
     }, [dispatch]);
 
     const columns = [
-        { field: 'product_code', headerName: 'Product Code', minWidth: 250 },
+        { field: 'product_code', headerName: 'Product Code', minWidth: 150 },
         { field: 'model_code', headerName: 'Model Code', flex: 1 }
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     renderCell: (params) => {
-        //         return (
-        //             <Box>
-        //                 <VisibilityIcon
-        //                     onClick={(e) => handleView(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'grey[50]',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //                 <DeleteOutlineIcon
-        //                     onClick={(e) => handleDelete(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'error.main',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //             </Box>
-        //         );
-        //     }
-        // }
     ];
 
     const handleDelete = (e, row) => {
@@ -80,8 +49,8 @@ const AppGrid = () => {
     };
 
     const handleRowClick = (params) => {
-        console.log(params);
         setDetailVisible(true);
+        setSubGridVisible(false);
     };
 
     return (
@@ -114,7 +83,7 @@ const AppGrid = () => {
                 <Box>
                     <Stack sx={{ width: '100%' }}>
                         {detailVisible ? (
-                            <GridProductCustomer />
+                            <GridProductCustomer visible={subGridVisible} />
                         ) : (
                             <Alert severity="info" icon={<CallReceivedIcon />}>
                                 Select product from list...

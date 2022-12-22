@@ -74,3 +74,9 @@ export const fetchCustomers = () => API.get('/maintenance/sales/customer');
 export const createCustomer = (newCustomer) => API.post('/maintenance/sales/customer', newCustomer);
 export const updateCustomer = (id, updateCustomer) => API.patch(`/maintenance/sales/customer/${id}`, updateCustomer);
 export const deleteCustomer = (id) => API.delete(`/maintenance/sales/customer/${id}`);
+
+export const fetchProductCustomers = () => API.get('/maintenance/sales/product-customer');
+export const createProductCustomer = (newProductCustomer) => API.post('/maintenance/sales/product-customer', newProductCustomer);
+export const updateProductCustomer = (id, updateProductCustomer) =>
+    API.patch(`/maintenance/sales/product-customer/${id}`, updateProductCustomer);
+export const deleteProductCustomer = (id) => API.delete(`/maintenance/sales/product-customer/${id}`);

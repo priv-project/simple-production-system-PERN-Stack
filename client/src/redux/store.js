@@ -20,6 +20,7 @@ import areaReducer from 'redux/maintenance/common/area';
 
 /* Maintenance/Sales Reducers */
 import customerReducer from 'redux/maintenance/sales/customer';
+import productCustomerReducer from 'redux/maintenance/sales/productCustomer';
 
 export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
@@ -41,6 +42,7 @@ export const store = configureStore({
         currencies: currencyReducer,
         areas: areaReducer,
         /* SALES */
-        customers: customerReducer
+        customers: customerReducer,
+        product_customers: productCustomerReducer
     }
 });

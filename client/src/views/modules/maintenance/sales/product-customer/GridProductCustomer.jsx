@@ -3,105 +3,65 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 // MATERIAL UI
-import { Grid, Box, Alert, Stack, Tabs, Tab } from '@mui/material';
-import { DataGrid, GridToolbarContainer, GridToolbar } from '@mui/x-data-grid';
-import CallReceivedIcon from '@mui/icons-material/CallReceived';
+import { Grid, Box, Button } from '@mui/material';
+import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 // MATERIAL ICONS
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 // ACTIONS
-import { deleteProduct, getProducts } from 'redux/maintenance/composite/actions/products';
+import { getProductCustomers } from 'redux/maintenance/sales/actions/productCustomer';
+import CustomerGrid from './CustomerGrid';
 
-const AppGrid = () => {
+const AppGrid = ({ addGridVisible, setAddGridVisible }) => {
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.products);
+    const data = useSelector((state) => state.product_customers);
 
     React.useEffect(() => {
-        dispatch(getProducts());
+        dispatch(getProductCustomers());
     }, [dispatch]);
 
     const columns = [
-        { field: 'product_code', headerName: 'Product Code', minWidth: 250 },
-        { field: 'model_code', headerName: 'Model Code', flex: 1 }
-        // {
-        //     field: 'actions',
-        //     headerName: 'Actions',
-        //     renderCell: (params) => {
-        //         return (
-        //             <Box>
-        //                 <VisibilityIcon
-        //                     onClick={(e) => handleView(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'grey[50]',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //                 <DeleteOutlineIcon
-        //                     onClick={(e) => handleDelete(e, params.row)}
-        //                     fontSize="small"
-        //                     sx={{
-        //                         color: 'error.main',
-        //                         '&:hover': {
-        //                             cursor: 'pointer'
-        //                         }
-        //                     }}
-        //                 />
-        //             </Box>
-        //         );
-        //     }
-        // }
+        { field: 'customer_code', headerName: 'Customer', minWidth: 250 },
+        { field: 'customer_desc', headerName: 'Description', flex: 1 }
     ];
 
-    const handleDelete = (e, row) => {
-        e.stopPropagation();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                dispatch(deleteProduct(row.product_id));
-                // setCurrentId(0);
-            }
-        });
-    };
-
-    const handleRowClick = (params) => {
-        console.log(params);
+    const ToolbarTemplate = () => {
+        return (
+            <GridToolbarContainer>
+                <Button size="small" startIcon={<AddRoundedIcon />} sx={{ fontWeight: '600' }} onClick={() => setAddGridVisible(true)}>
+                    Add Product Customer
+                </Button>
+            </GridToolbarContainer>
+        );
     };
 
     return (
         <Box>
-            <DataGrid
-                rows={data}
-                columns={columns}
-                getRowId={(row) => row.product_id}
-                onRowClick={handleRowClick}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                components={{ Toolbar: GridToolbar }}
-                componentsProps={{
-                    toolbar: {
-                        csvOptions: { disableToolbarButton: true },
-                        printOptions: { disableToolbarButton: true },
-                        showQuickFilter: true,
-                        quickFilterProps: { debounceMs: 250 }
-                    }
-                }}
-                disableColumnFilter
-                disableColumnSelector
-                disableDensitySelector
-                autoHeight={true}
-            />
+            {addGridVisible ? (
+                <CustomerGrid setAddGridVisible={setAddGridVisible} />
+            ) : (
+                <DataGrid
+                    rows={data}
+                    columns={columns}
+                    getRowId={(row) => row.prod_cust_id}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    components={{ Toolbar: ToolbarTemplate }}
+                    componentsProps={{
+                        toolbar: {
+                            csvOptions: { disableToolbarButton: true },
+                            printOptions: { disableToolbarButton: true },
+                            showQuickFilter: true,
+                            quickFilterProps: { debounceMs: 250 }
+                        }
+                    }}
+                    disableColumnFilter
+                    disableColumnSelector
+                    disableDensitySelector
+                    autoHeight={true}
+                />
+            )}
         </Box>
     );
 };
