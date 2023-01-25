@@ -1,8 +1,9 @@
 import * as api from 'api/maintenance';
 import {
     FETCH,
-    CREATE
-    // , UPDATE, DELETE
+    CREATE,
+    // UPDATE,
+    DELETE
 } from 'redux/maintenance/composite/product_part';
 import Swal from 'sweetalert2';
 
@@ -52,14 +53,14 @@ export const createProductPart = (id, formData, setAddPartGridVisible) => async 
 //     }
 // };
 
-// export const deleteProduct = (id) => async (dispatch) => {
-//     try {
-//         await await api.deleteProduct(id);
+export const deleteProductPart = (ids) => async (dispatch) => {
+    try {
+        await api.deleteProductPart(ids);
 
-//         dispatch({ type: actionTypes.DELETE_PRODUCT, payload: id });
-//         Swal.fire('Success!', 'Product deleted successfully', 'success');
-//     } catch (error) {
-//         console.log(error);
-//         Swal.fire('Error!', 'Something went wrong', 'error');
-//     }
-// };
+        dispatch(DELETE(ids));
+        Swal.fire('Success!', 'Product part has been successfully', 'success');
+    } catch (error) {
+        console.log(error);
+        Swal.fire('Error!', 'Something went wrong', 'error');
+    }
+};

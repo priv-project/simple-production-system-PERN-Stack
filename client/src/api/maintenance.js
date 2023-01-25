@@ -28,6 +28,7 @@ export const deleteProduct = (id) => API.delete(`/maintenance/composite/products
 export const fetchProductParts = (id) => API.get(`/maintenance/composite/products/product-parts/${id}`);
 export const fetchProductBOM = (id) => API.get(`/maintenance/composite/products/product-bom/${id}`);
 export const createProductPart = (id, formData) => API.post(`/maintenance/composite/products/product-parts/${id}`, formData);
+export const deleteProductPart = (id) => API.delete(`/maintenance/composite/products/product-parts/${id}`);
 
 // ASSEMBLY
 export const fetchAssembly = () => API.get('/maintenance/composite/assembly');

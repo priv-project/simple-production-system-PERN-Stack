@@ -15,13 +15,13 @@ export const productPartSlice = createSlice({
         },
         CREATE: (state, action) => {
             return [...state, action.payload.result];
-        }
+        },
         // UPDATE: (state, action) => {
         //     return state.map((product) => (product.product_id === action.payload.result.product_id ? action.payload.result : product));
         // },
-        // DELETE: (state, action) => {
-        //     return state.filter((product) => part.product_id !== action.payload);
-        // }
+        DELETE: (state, action) => {
+            return state.filter((productPart) => !action.payload.includes(productPart.prod_part_id));
+        }
     }
 });
 

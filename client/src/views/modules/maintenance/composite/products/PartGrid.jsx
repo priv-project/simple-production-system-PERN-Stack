@@ -11,9 +11,10 @@ import { Button } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 // ACTIONS
-import { getProductParts } from 'redux/maintenance/composite/actions/product_parts';
+import { getProductParts, deleteProductPart } from 'redux/maintenance/composite/actions/product_parts';
 
 const PartGrid = ({ currentId, setAddPartGridVisible }) => {
     const dispatch = useDispatch();
@@ -21,11 +22,21 @@ const PartGrid = ({ currentId, setAddPartGridVisible }) => {
         return e.product_id === currentId;
     });
 
+    const [selectionModel, setSelectionModel] = React.useState([]);
+
     const CustomToolbar = () => {
         return (
             <GridToolbarContainer>
                 <Button size="small" startIcon={<AddIcon />} sx={{ fontWeight: '600' }} onClick={() => setAddPartGridVisible(true)}>
-                    Add Product BOM
+                    Add Part
+                </Button>
+                <Button
+                    size="small"
+                    startIcon={<DeleteIcon />}
+                    sx={{ fontWeight: '600' }}
+                    onClick={() => dispatch(deleteProductPart(selectionModel))}
+                >
+                    Delete
                 </Button>
             </GridToolbarContainer>
         );
@@ -38,37 +49,8 @@ const PartGrid = ({ currentId, setAddPartGridVisible }) => {
     const columns = [
         { field: 'part_code', headerName: 'Part Code', minWidth: 130, flex: 1 },
         { field: 'part_description', headerName: 'Description', minWidth: 200, flex: 1 },
-        { field: 'model_code', headerName: 'Model', minWidth: 135, flex: 1 },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            renderCell: (params) => {
-                return (
-                    <Box>
-                        <VisibilityIcon
-                            onClick={(e) => handleView(e, params.row)}
-                            fontSize="small"
-                            sx={{
-                                color: 'grey[50]',
-                                '&:hover': {
-                                    cursor: 'pointer'
-                                }
-                            }}
-                        />
-                        <DeleteOutlineIcon
-                            onClick={(e) => handleDelete(e, params.row)}
-                            fontSize="small"
-                            sx={{
-                                color: 'error.main',
-                                '&:hover': {
-                                    cursor: 'pointer'
-                                }
-                            }}
-                        />
-                    </Box>
-                );
-            }
-        }
+        { field: 'model_code', headerName: 'Model', minWidth: 135 },
+        { field: 'prod_part_usage', headerName: 'Usage', minWidth: 135, flex: 1 }
     ];
 
     const handleDelete = (e, row) => {
@@ -100,10 +82,15 @@ const PartGrid = ({ currentId, setAddPartGridVisible }) => {
             <DataGrid
                 rows={data}
                 columns={columns}
-                getRowId={(row) => row.part_id}
+                getRowId={(row) => row.prod_part_id}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
                 components={{ Toolbar: CustomToolbar }}
+                checkboxSelection={true}
+                onSelectionModelChange={(newSelectionModel) => {
+                    setSelectionModel(newSelectionModel);
+                }}
+                selectionModel={selectionModel}
             />
         </div>
     );
