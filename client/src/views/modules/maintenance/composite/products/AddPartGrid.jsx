@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, OutlinedInput } from '@mui/material';
 import { DataGrid, GridToolbarContainer, useGridApiRef } from '@mui/x-data-grid';
 import useApiRef from 'hooks/useApiRef';
@@ -12,11 +12,23 @@ import SaveIcon from '@mui/icons-material/Save';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 // ACTIONS
-import { createProductPart } from 'redux/maintenance/composite/actions/product_parts';
+import { createProductPart, getProductParts } from 'redux/maintenance/composite/actions/product_parts';
 
 export default function DataGridDemo({ data, currentId, setAddPartGridVisible }) {
     const dispatch = useDispatch();
     const apiRef = React.useRef(null);
+
+    const partIds = useSelector((state) => state.product_parts)
+        .filter((e) => {
+            return e.product_id === currentId;
+        })
+        .map((p) => {
+            return p.part_id.includes();
+        });
+
+    React.useEffect(() => {
+        dispatch(getProductParts(currentId));
+    }, []);
 
     const gridColumns = [
         {

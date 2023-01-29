@@ -17,12 +17,14 @@ export const getProductParts = async (req, res) => {
   }
 };
 
-export const getProductBom = async (req, res) => {
-  const { id } = req.params;
+export const getParts = async (req, res) => {
+  const { id, model_id } = req.params;
   try {
     let result = await pool.query(
-      `SELECT * FROM vw_product_part WHERE prod_part_product_id = $1 ORDER BY product_code, part_code`,
-      [id]
+      `SELECT * FROM vw_part WHERE part_id NOT IN (
+        SELECT part_id from vw_product_part WHERE prod_part_product_id = $1 AND part_model_id = $2
+      ) ORDER BY part_code`,
+      [id, model_id]
     );
     result = result.rows;
     res.status(201).json({ result });

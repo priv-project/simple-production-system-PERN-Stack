@@ -203,6 +203,7 @@ const Form = ({ currentId, setCurrentId, setFormVisible }) => {
                     </form>
                 )}
             </Formik>
+
             {currentId !== 0 ? (
                 <Box>
                     <SubCard title="Bill of Materials" sx={{ mt: 4 }}>
